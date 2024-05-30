@@ -20,6 +20,9 @@ public class SanPham {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
+    @ManyToOne
+    @JoinColumn(name = "id_danh_muc")
+    private DanhMuc id_danhMuc;
     @Column(name = "ma_san_pham")
     private String maSP;
     @Column(name = "ten_san_pham")
