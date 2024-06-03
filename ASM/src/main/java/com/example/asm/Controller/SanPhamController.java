@@ -1,26 +1,24 @@
 package com.example.asm.Controller;
 
 import com.example.asm.Model.SanPham;
-import com.example.asm.Respository.DanhMucRespository;
-import com.example.asm.Respository.SanPhamRespository;
+import com.example.asm.Repository.DanhMucRepository;
+import com.example.asm.Repository.SanPhamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
-import java.util.List;
 
 @Controller
 public class SanPhamController {
     @Autowired
-    DanhMucRespository dmr;
+    DanhMucRepository dmr;
     @Autowired
-    SanPhamRespository spr;
+    SanPhamRepository spr;
 
     //    @ResponseBody
 //    @RequestMapping("/home/viewSP")

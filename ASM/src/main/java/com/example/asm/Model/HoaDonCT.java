@@ -18,8 +18,9 @@ public class HoaDonCT {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "id_hoa_don")
-    private Integer id_hoaDon;
+    @ManyToOne
+    @JoinColumn(name = "id_hoa_don")
+    private HoaDon id_hoaDon;
     @ManyToOne
     @JoinColumn(name = "id_ctsp")
     private CTSP id_ctsp;
@@ -31,8 +32,8 @@ public class HoaDonCT {
     private Float tongTien;
     @Column(name = "trang_thai")
     private String trangThai;
-    @Column(name="ngay_tao")
+    @Column(name = "ngay_tao")
     private Date ngayTao;
-    @Column(name="ngay_sua")
+    @Column(name = "ngay_sua")
     private Date ngaySua;
 }
