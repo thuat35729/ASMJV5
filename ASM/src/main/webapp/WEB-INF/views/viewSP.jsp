@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -6,8 +7,30 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 </head>
+<form action="/san-pham/add" method="post">
+    <p>Ma San Pham</p>
+    <input type="text" name="maSP"><br>
+    <p>Ten San Pham</p>
+    <input type="text" name="tenSP"><br>
+    <p>Trang Thai</p>
+    <input type="text" name="trangThai"><br>
+    <p>Ma San Pham</p>
+    <select name="id_danhMuc">
+        <c:forEach items="${listdm}" var="dm">
+            <option value="${dm.id}">
+                    ${dm.tenDanhMuc}
+            </option>
+        </c:forEach>
+    </select>
+    <button type="submit">ADD</button>
+
+</form>
+<%--<form method="get" action="/home/viewSP">--%>
+<%--    <button type="submit" class="view" name="view" value="submit">Hien thi</button>--%>
+<%--</form>--%>
+<%--<c:if test="${view == 'submit'}">--%>
 <body>
 <table border="2">
     <thead>
@@ -24,20 +47,37 @@
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${list}" var="dm" varStatus="i">
+    <c:forEach items="${page.content}" var="sp" varStatus="i">
         <tr>
             <td>${i.index + 1}</td>
-            <td>${dm.id}</td>
-            <td>${dm.maSP}</td>
-            <td>${dm.tenSP}</td>
-            <td>${dm.trangThai}</td>
-            <td>${dm.ngayTao}</td>
-            <td>${dm.ngaySua}</td>
-            <td>${dm.id_danhMuc.tenDanhMuc}</td>
-            <td>${dm.id_danhMuc.maDanhMuc}</td>
+            <td>${sp.id}</td>
+            <td>${sp.maSP}</td>
+            <td>${sp.tenSP}</td>
+            <td>${sp.trangThai}</td>
+            <td>${sp.ngayTao}</td>
+            <td>${sp.ngaySua}</td>
+            <td>${sp.id_danhMuc.tenDanhMuc}</td>
+            <td>${sp.id_danhMuc.maDanhMuc}</td>
+            <td>
+                </button> <a href="/san-pham/delete?id=${sp.id}">
+                <button>Delete</button>
+            </a>
+                <a href="/san-pham/detail?id=${sp.id}">
+                    <button>Update</button>
+                </a>
+            </td>
         </tr>
+
     </c:forEach>
+    <div>
+        <a href="/home/viewSP?pageNo=0"> |&lt; </a>
+        <a href="/home/viewSP?pageNo=${page.number - 1}" <c:if test="${page.number == 0}">class="disabled"</c:if>> &lt;&lt; </a>
+        <a href="/home/viewSP?pageNo=${page.number + 1}"
+           <c:if test="${page.number + 1 >= page.totalPages}">class="disabled"</c:if>> &gt;&gt; </a>
+        <a href="/home/viewSP?pageNo=${page.totalPages - 1}"> &gt;| </a>
+    </div>
     </tbody>
 </table>
+<%--</c:if>--%>
 </body>
 </html>

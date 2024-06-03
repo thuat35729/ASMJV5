@@ -20,8 +20,9 @@ public class HoaDonCT {
     private Integer id;
     @Column(name = "id_hoa_don")
     private Integer id_hoaDon;
-    @Column(name = "id_ctsp")
-    private Integer id_ctsp;
+    @ManyToOne
+    @JoinColumn(name = "id_ctsp")
+    private CTSP id_ctsp;
     @Column(name = "so_luong")
     private Integer soLuong;
     @Column(name = "gia_ban")

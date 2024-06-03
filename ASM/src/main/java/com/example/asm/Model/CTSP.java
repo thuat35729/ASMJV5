@@ -17,12 +17,17 @@ import java.util.Date;
 public class CTSP {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+
     private Integer id;
-    @Column(name = "id_mau_sac")
-    private Integer id_mauSac;
-    @Column(name = "id_size")
-    private Integer id_size;
+    @ManyToOne
+    @JoinColumn(name = "id_mau_sac")
+    private MauSac id_mauSac;
+    @ManyToOne
+    @JoinColumn(name = "id_sp")
+    private SanPham id_sanPham;
+    @ManyToOne
+    @JoinColumn(name = "id_size")
+    private Size id_size;
     @Column(name = "gia_ban")
     private Float giaBan;
     @Column(name = "so_luong_ton")

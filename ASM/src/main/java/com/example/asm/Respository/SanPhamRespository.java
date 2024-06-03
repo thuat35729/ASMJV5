@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface SanPhamRespository extends JpaRepository<SanPham, Integer> {
     List<SanPham> findAllByOrderByNgayTaoDesc();
+
+    SanPham findAllById(Integer id);
 }
