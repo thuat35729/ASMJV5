@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface HoaDonChiTietRepository extends JpaRepository<HoaDonCT, Integer> {
-    List<HoaDonCT> findHoaDonCTById_hoaDon(Integer id);
+    List<HoaDonCT> findByIdHoaDon_Id(Integer idHoaDon);
 }

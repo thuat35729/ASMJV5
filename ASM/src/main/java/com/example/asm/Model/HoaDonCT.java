@@ -21,7 +21,7 @@ public class HoaDonCT {
     private Integer id;
     @ManyToOne
     @JoinColumn(name = "id_hoa_don")
-    private HoaDon id_hoaDon;
+    private HoaDon idHoaDon;
     @ManyToOne
     @JoinColumn(name = "id_ctsp")
     private CTSP id_ctsp;

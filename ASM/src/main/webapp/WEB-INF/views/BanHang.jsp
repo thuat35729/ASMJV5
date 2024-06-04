@@ -32,7 +32,9 @@
                     <td>${hd.ngayTao}</td>
                     <td>${hd.trangThai}</td>
                     <td>
-                        <a href="/ban-hang/viewhdct?id=${hd.id}"><button class="btn btn-info">Chon</button></a>
+                        <a href="/ban-hang/view?id=${hd.id}">
+                            <button class="btn btn-info">Chon</button>
+                        </a>
                     </td>
                 </tr>
             </c:forEach>
@@ -60,7 +62,9 @@
                     <td>${hdct.soLuong}</td>
                     <td>${hdct.id_ctsp.giaBan}</td>
                     <td>${hdct.tongTien}</td>
-                    <td><button class="btn btn-danger">DELETE</button></td>
+                    <td>
+                        <button class="btn btn-danger">DELETE</button>
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>
@@ -76,22 +80,40 @@
                 </div>
                 <button class="btn btn-primary">Search</button>
             </div>
-            <div class="mb-3">
-                <label class="col-3">Ten Khach hang</label>
-                <input type="text" class="col-7" readonly>
-            </div>
-            <div class="mb-3">
-                <label class="col-3">ID Hoa don</label>
-                <input type="text" class="col-7" readonly>
-            </div>
-            <div class="mb-3">
-                <label class="col-3">Tong tien</label>
-                <input type="text" class="col-7" readonly>
-            </div>
-            <div>
-                <button class="btn btn-primary">Tạo hoá đơn</button>
-                <button class="btn btn-primary">Thanh toán</button>
-            </div>
+
+            <form action="/ban-hang/add" method="post">
+                <div class="mb-3">
+                    <label class="col-3">Ten Khach hang</label>
+                    <input type="text" class="col-7" readonly
+                           <c:forEach var="hd" items="${listtthd}">value="${hd.id_khachHang.hoTen}"
+                    </c:forEach>>
+                    <input hidden="hidden"
+                           <c:forEach var="hd" items="${listtthd}">value="${hd.id_khachHang.id}"
+                    </c:forEach> name="id_khachHang">
+                    <input hidden="hidden"
+                           <c:forEach var="hd" items="${listtthd}">value="${hd.id_khachHang.diaChi}"
+                    </c:forEach> name="diaChi">
+                    <input hidden="hidden"
+                           <c:forEach var="hd" items="${listtthd}">value="${hd.id_khachHang.sdt}"
+                    </c:forEach> name="sdt">
+                </div>
+                <div class="mb-3">
+                    <label class="col-3">ID Hoa don</label>
+                    <input type="text" class="col-7" readonly
+                           <c:forEach var="hd" items="${listtthd}">value="${hd.id}"</c:forEach>>
+                </div>
+                <div class="mb-3">
+                    <label class="col-3">Tong tien</label>
+                    <input type="text" class="col-7" readonly
+                           <c:forEach var="hdct" items="${listhdct}">value="${hdct.tongTien}"</c:forEach>>
+                </div>
+                <div>
+                    <button class="btn btn-primary" type="submit">Tạo hoá đơn</button>
+                    <button class="btn btn-primary">Thanh toán</button>
+                </div>
+            </form>
+
+
         </div>
 
     </div>
@@ -114,19 +136,19 @@
         </thead>
         <tbody>
         <c:forEach items="${listctsp}" var="ctsp" varStatus="i">
-        <tr>
-            <td>${i.index + 1}</td>
-            <td>${ctsp.id}</td>
-            <td>${ctsp.id_sanPham.tenSP}</td>
-            <td>${ctsp.id_mauSac.tenMau}</td>
-            <td>${ctsp.giaBan}</td>
-            <td>${ctsp.soLuongTon}</td>
-            <td>${ctsp.trangThai}</td>
-            <td>Chua thanh toan</td>
-            <td>
-                <button class="btn btn-primary">Chọn mua</button>
-            </td>
-        </tr>
+            <tr>
+                <td>${i.index + 1}</td>
+                <td>${ctsp.id}</td>
+                <td>${ctsp.id_sanPham.tenSP}</td>
+                <td>${ctsp.id_mauSac.tenMau}</td>
+                <td>${ctsp.giaBan}</td>
+                <td>${ctsp.soLuongTon}</td>
+                <td>${ctsp.trangThai}</td>
+                <td>Chua thanh toan</td>
+                <td>
+                    <button class="btn btn-primary">Chọn mua</button>
+                </td>
+            </tr>
         </c:forEach>
         </tbody>
     </table>

@@ -9,20 +9,33 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 </head>
 <body>
-<table>
+<<h2>Danh sách hoá đơn chi tiết</h2>
+<table class="table">
     <thead>
     <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>STT</td>
+        <td>ID</td>
+        <td>Ten san pham</td>
+        <td>So luong</td>
+        <td>Gia ban</td>
+        <td>Tong tien</td>
+        <td>Chuc nang</td>
     </tr>
     </thead>
     <tbody>
-
+    <c:forEach varStatus="i" var="hdct" items="${listhdct}">
+        <tr>
+            <td>${i.index +1}</td>
+            <td>${hdct.id}</td>
+            <td>${hdct.id_ctsp.id_sanPham.tenSP}</td>
+            <td>${hdct.soLuong}</td>
+            <td>${hdct.id_ctsp.giaBan}</td>
+            <td>${hdct.tongTien}</td>
+            <td><button class="btn btn-danger">DELETE</button></td>
+        </tr>
+    </c:forEach>
     </tbody>
 </table>
+</div>
 </body>
 </html>
