@@ -9,6 +9,12 @@
     <title>Document</title>
 
 </head>
+
+<%--<form method="get" action="/home/viewSP">--%>
+<%--    <button type="submit" class="view" name="view" value="submit">Hien thi</button>--%>
+<%--</form>--%>
+<%--<c:if test="${view == 'submit'}">--%>
+<body>
 <form action="/san-pham/add" method="post">
     <p>Ma San Pham</p>
     <input type="text" name="maSP"><br>
@@ -27,11 +33,6 @@
     <button type="submit">ADD</button>
 
 </form>
-<%--<form method="get" action="/home/viewSP">--%>
-<%--    <button type="submit" class="view" name="view" value="submit">Hien thi</button>--%>
-<%--</form>--%>
-<%--<c:if test="${view == 'submit'}">--%>
-<body>
 <table border="2">
     <thead>
     <tr>

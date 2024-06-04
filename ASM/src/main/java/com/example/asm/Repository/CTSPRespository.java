@@ -1,4 +1,9 @@
 package com.example.asm.Repository;
 
-public interface CTSPRespository {
+import com.example.asm.Model.CTSP;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface CTSPRespository extends JpaRepository<CTSP, Integer> {
 }

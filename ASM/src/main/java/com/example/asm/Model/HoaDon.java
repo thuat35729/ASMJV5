@@ -16,7 +16,7 @@ import java.util.Date;
 public class HoaDon {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JoinColumn(name = "id")
+    @Column(name = "id")
     private Integer id;
     @ManyToOne
     @JoinColumn(name = "id_khach_hang")
@@ -29,4 +29,8 @@ public class HoaDon {
     @Temporal(TemporalType.DATE)
     @Column(name = "ngay_sua")
     private Date ngaySua;
+    @Column(name ="dia_chi")
+    private String diaChi;
+    @Column(name="so_dien_thoai")
+    private String sdt;
 }

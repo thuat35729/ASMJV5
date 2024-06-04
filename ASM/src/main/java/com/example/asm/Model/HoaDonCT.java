@@ -13,6 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "hdct")
 public class HoaDonCT {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +25,7 @@ public class HoaDonCT {
     @ManyToOne
     @JoinColumn(name = "id_ctsp")
     private CTSP id_ctsp;
-    @Column(name = "so_luong")
+    @Column(name = "so_luong_mua")
     private Integer soLuong;
     @Column(name = "gia_ban")
     private Float giaBan;
