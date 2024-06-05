@@ -74,28 +74,29 @@
         <h2>Tạo hoá đơn</h2>
         <div class="row">
             <div>
-                <div>
-                    <label class="mb-3 col-3">Số điện thoại</label>
-                    <input type="text" class="col-7">
-                </div>
-                <button class="btn btn-primary">Search</button>
+                <form>
+                    <form action="/ban-hang/view" method="get">
+                        <div>
+                            <label class="mb-3 col-3" name="sdt">Số điện thoại</label>
+                            <input type="text" class="col-7">
+                        </div>
+                        <button class="btn btn-primary" type="submit">Search</button>
+                    </form>
+                </form>
             </div>
 
-            <form action="/ban-hang/add" method="post">
+            <form action="/ban-hang/them-hd" method="post">
                 <div class="mb-3">
                     <label class="col-3">Ten Khach hang</label>
                     <input type="text" class="col-7" readonly
-                           <c:forEach var="hd" items="${listtthd}">value="${hd.id_khachHang.hoTen}"
-                    </c:forEach>>
+                           value="${listtthd[0].id_khachHang.hoTen} ${listkh[0].hoTen}">
                     <input hidden="hidden"
-                           <c:forEach var="hd" items="${listtthd}">value="${hd.id_khachHang.id}"
-                    </c:forEach> name="id_khachHang">
+                           value="${listtthd[0].id_khachHang.id} ${listkh[0].id}" name="id_khachHang">
                     <input hidden="hidden"
-                           <c:forEach var="hd" items="${listtthd}">value="${hd.id_khachHang.diaChi}"
-                    </c:forEach> name="diaChi">
+                           value="${listtthd[0].id_khachHang.diaChi} ${listkh[0].diaChi}" name="diaChi">
                     <input hidden="hidden"
-                           <c:forEach var="hd" items="${listtthd}">value="${hd.id_khachHang.sdt}"
-                    </c:forEach> name="sdt">
+                           value="${listtthd[0].id_khachHang.sdt} ${listkh[0].diaChi}" name="sdt">
+                    <p style="color: red">${message}</p>
                 </div>
                 <div class="mb-3">
                     <label class="col-3">ID Hoa don</label>
@@ -107,13 +108,15 @@
                     <input type="text" class="col-7" readonly
                            <c:forEach var="hdct" items="${listhdct}">value="${hdct.tongTien}"</c:forEach>>
                 </div>
+
                 <div>
                     <button class="btn btn-primary" type="submit">Tạo hoá đơn</button>
-                    <button class="btn btn-primary">Thanh toán</button>
+                    <a <c:forEach items="${listtthd}"
+                                  var="hd"> href="/ban-hang/thanh-toan?idHoaDon=${hd.id}"</c:forEach>>
+                        <button class="btn btn-primary" type="button">Thanh toán</button>
+                    </a>
                 </div>
             </form>
-
-
         </div>
 
     </div>

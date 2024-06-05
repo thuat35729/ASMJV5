@@ -8,5 +8,7 @@ import java.util.List;
 
 @Repository
 public interface HoaDonRepository extends JpaRepository<HoaDon, Integer> {
-List<HoaDon> findTop1ById(Integer id);
+    List<HoaDon> findTop1ById(Integer id);
+
+    HoaDon findAllById(Integer id);
 }
