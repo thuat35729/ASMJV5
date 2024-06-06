@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -15,6 +16,7 @@
 <%--</form>--%>
 <%--<c:if test="${view == 'submit'}">--%>
 <body>
+<form:form></form:form>
 <form action="/san-pham/add" method="post">
     <p>Ma San Pham</p>
     <input type="text" name="maSP"><br>

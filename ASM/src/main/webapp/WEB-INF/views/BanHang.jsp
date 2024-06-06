@@ -63,7 +63,9 @@
                     <td>${hdct.id_ctsp.giaBan}</td>
                     <td>${hdct.tongTien}</td>
                     <td>
-                        <button class="btn btn-danger">DELETE</button>
+                        <a href="/ban-hang/xoaSP?idHDCT=${hdct.id}">
+                            <button class="btn btn-danger">DELETE</button>
+                        </a>
                     </td>
                 </tr>
             </c:forEach>
@@ -106,7 +108,7 @@
                 <div class="mb-3">
                     <label class="col-3">Tong tien</label>
                     <input type="text" class="col-7" readonly
-                           <c:forEach var="hdct" items="${listhdct}">value="${hdct.tongTien}"</c:forEach>>
+                           value="${tongTienHD}">
                 </div>
 
                 <div>
@@ -144,12 +146,14 @@
                 <td>${ctsp.id}</td>
                 <td>${ctsp.id_sanPham.tenSP}</td>
                 <td>${ctsp.id_mauSac.tenMau}</td>
+                <td>${ctsp.id_size.tenSize}</td>
                 <td>${ctsp.giaBan}</td>
                 <td>${ctsp.soLuongTon}</td>
                 <td>${ctsp.trangThai}</td>
-                <td>Chua thanh toan</td>
                 <td>
-                    <button class="btn btn-primary">Chọn mua</button>
+                    <a href="/ban-hang/them-sp?idSPCT=${ctsp.id}">
+                        <button class="btn btn-primary">Chọn mua</button>
+                    </a>
                 </td>
             </tr>
         </c:forEach>

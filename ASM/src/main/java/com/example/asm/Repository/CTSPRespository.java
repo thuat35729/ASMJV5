@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CTSPRespository extends JpaRepository<CTSP, Integer> {
+    CTSP findAllById(Integer id);
 }

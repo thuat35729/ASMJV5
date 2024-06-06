@@ -29,7 +29,7 @@ public class CTSP {
     @JoinColumn(name = "id_size")
     private Size id_size;
     @Column(name = "gia_ban")
-    private Float giaBan;
+    private Double giaBan;
     @Column(name = "so_luong_ton")
     private Integer soLuongTon;
     @Column(name = "trang_thai")

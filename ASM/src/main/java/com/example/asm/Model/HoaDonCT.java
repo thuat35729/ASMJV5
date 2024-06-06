@@ -28,9 +28,9 @@ public class HoaDonCT {
     @Column(name = "so_luong_mua")
     private Integer soLuong;
     @Column(name = "gia_ban")
-    private Float giaBan;
+    private Double giaBan;
     @Column(name = "tong_tien")
-    private Float tongTien;
+    private Double tongTien;
     @Column(name = "trang_thai")
     private String trangThai;
     @Column(name = "ngay_tao")
