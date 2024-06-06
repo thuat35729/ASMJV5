@@ -16,7 +16,7 @@
 <%--</form>--%>
 <%--<c:if test="${view == 'submit'}">--%>
 <body>
-<form:form></form:form>
+<%--<form:form></form:form>--%>
 <form action="/san-pham/add" method="post">
     <p>Ma San Pham</p>
     <input type="text" name="maSP"><br>
@@ -25,7 +25,7 @@
     <p>Trang Thai</p>
     <input type="text" name="trangThai"><br>
     <p>Ma San Pham</p>
-    <select name="id_danhMuc">
+    <select name="idDanhMuc">
         <c:forEach items="${listdm}" var="dm">
             <option value="${dm.id}">
                     ${dm.tenDanhMuc}
@@ -73,11 +73,11 @@
 
     </c:forEach>
     <div>
-        <a href="/home/viewSP?pageNo=0"> |&lt; </a>
-        <a href="/home/viewSP?pageNo=${page.number - 1}" <c:if test="${page.number == 0}">class="disabled"</c:if>> &lt;&lt; </a>
-        <a href="/home/viewSP?pageNo=${page.number + 1}"
+        <a href="/san-pham/view?pageNo=0"> |&lt; </a>
+        <a href="/san-pham/view?pageNo=${page.number - 1}" <c:if test="${page.number == 0}">class="disabled"</c:if>> &lt;&lt; </a>
+        <a href="/san-pham/view?pageNo=${page.number + 1}"
            <c:if test="${page.number + 1 >= page.totalPages}">class="disabled"</c:if>> &gt;&gt; </a>
-        <a href="/home/viewSP?pageNo=${page.totalPages - 1}"> &gt;| </a>
+        <a href="/san-pham/view?pageNo=${page.totalPages - 1}"> &gt;| </a>
     </div>
     </tbody>
 </table>

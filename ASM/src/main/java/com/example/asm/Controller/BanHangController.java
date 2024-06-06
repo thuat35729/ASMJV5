@@ -5,6 +5,9 @@ import com.example.asm.Model.HoaDon;
 import com.example.asm.Model.HoaDonCT;
 import com.example.asm.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,17 +31,23 @@ public class BanHangController {
     KhachHangRepository khr;
     Integer idHD;
     double tongTien;
-    int soLuongMoi;
 
     public BanHangController() {
         idHD = 0;
         tongTien = 0;
+
     }
 
     @RequestMapping("/ban-hang/view")
-    public String view(Model model, @RequestParam(value = "id", defaultValue = "0") Integer id, @RequestParam(value = "sdt", defaultValue = "a") String sdt) {
-        model.addAttribute("listhd", hdr.findAll(Sort.by(Sort.Direction.DESC, "ngayTao")));
-        model.addAttribute("listctsp", ctspr.findAll());
+    public String view(Model model, @RequestParam(value = "id", defaultValue = "0") Integer id,
+                       @RequestParam(value = "sdt", defaultValue = "a") String sdt,
+                       @RequestParam(value = "pageNo", defaultValue = "0") Integer pageNo) {
+        Pageable pageable = PageRequest.of(pageNo, 5);
+        Page<HoaDon> page = hdr.findAllByOrderByNgayTaoDesc(pageable);
+        model.addAttribute("listhd", page.getContent());
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPage", page.getTotalPages());
+        model.addAttribute("listctsp", ctspr.findAllByTrangThaiLike("Active"));
         model.addAttribute("listkh", khr.findTop1BySdtLike(sdt));
         idHD = id;
         //model.addAttribute("listtthd", hdr.findById(id));
@@ -110,13 +119,16 @@ public class BanHangController {
             }
         }
         if (productExistsInCurrentOrder) {
-            soLuongMoi = hoaDonChiTietTonTai.getSoLuong() + soLuong;
+            int soLuongMoi = hoaDonChiTietTonTai.getSoLuong() + soLuong;
             hoaDonChiTietTonTai.setSoLuong(soLuongMoi);
             hoaDonChiTietTonTai.setTongTien(hoaDonChiTietTonTai.getGiaBan() * soLuongMoi);
             ctsp.setSoLuongTon(ctsp.getSoLuongTon() - soLuong);
             hoaDonChiTietTonTai.setNgaySua(new Date());
             hdctr.save(hoaDonChiTietTonTai);
+
         } else {
+            int soLuongMoi = soLuong;
+            ctsp.setSoLuongTon(ctsp.getSoLuongTon() - soLuong);
             hoaDonCT.setIdHoaDon(hd);
             hoaDonCT.setGiaBan(ctsp.getGiaBan());
             hoaDonCT.setIdCtsp(ctsp);
@@ -127,13 +139,14 @@ public class BanHangController {
             hoaDonCT.setTongTien(hoaDonCT.getGiaBan() * hoaDonCT.getSoLuong());
             hdctr.save(hoaDonCT);
         }
+
         return "redirect:/ban-hang/view";
     }
 
     @GetMapping("/ban-hang/xoaSP")
     public String xoaSP(@RequestParam("idHDCT") Integer id) {
         HoaDonCT hdct = hdctr.findAllById(id);
-        soLuongMoi = hdct.getSoLuong();
+        int soLuongMoi = hdct.getSoLuong();
         CTSP ctsp = ctspr.findAllById(hdct.getIdCtsp().getId());
         ctsp.setSoLuongTon(ctsp.getSoLuongTon() + soLuongMoi);
         ctspr.save(ctsp);

@@ -38,7 +38,7 @@ public class SanPhamController {
 
     @RequestMapping("/san-pham/view")
     public String page(@RequestParam(value = "pageNo", defaultValue = "0") Integer pageNo,
-                       @RequestParam(value = "view", required = false) String view,
+                       //@RequestParam(value = "view", required = false) String view,
                        Model model) {
 //         if ("submit".equals(view)) {
         Pageable pageable = PageRequest.of(pageNo, 2);
@@ -57,7 +57,7 @@ public class SanPhamController {
         sanPham.setNgayTao(new Date());
         sanPham.setNgaySua(new Date());
         spr.save(sanPham);
-        return "redirect:/home/viewSP";
+        return "redirect:/san-pham/view";
     }
 
     @PostMapping("/san-pham/update")
@@ -69,7 +69,7 @@ public class SanPhamController {
 //        sp.setId_danhMuc(sanPham.getId_danhMuc());
         sanPham.setNgaySua(new Date());
         spr.save(sanPham);
-        return "redirect:/home/viewSP";
+        return "redirect:/san-pham/view";
     }
 
     @GetMapping("/san-pham/delete")
@@ -77,7 +77,7 @@ public class SanPhamController {
         spr.deleteById(id);
 //        SanPham sp = spr.findAllById(id);
 //        spr.delete(sp);
-        return "redirect:/home/viewSP";
+        return "redirect:/san-pham/view";
     }
 
     @GetMapping("/san-pham/detail")

@@ -2,8 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Title</title>
+    <title>Ban Hang</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
@@ -42,6 +43,27 @@
             </c:forEach>
             </tbody>
         </table>
+        <div>
+            <nav aria-label="Page navigation example" name="pageNo">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <c:if test="${currentPage > 0}">
+                            <a class="page-link" href="/ban-hang/view?pageNo=${currentPage - 1}">Previous</a>
+                        </c:if>
+                    </li>
+                    <c:forEach var="i" begin="1" end="${totalPage}">
+                        <li class="page-item ${i == currentPage + 1 ? 'active' : ''}">
+                            <a class="page-link" href="/ban-hang/view?pageNo=${i - 1}">${i}</a>
+                        </li>
+                    </c:forEach>
+                    <li class="page-item">
+                        <c:if test="${currentPage < totalPage - 1}">
+                            <a class="page-link" href="/ban-hang/view?pageNo=${currentPage + 1}">Next</a>
+                        </c:if>
+                    </li>
+                </ul>
+            </nav>
+        </div>
         <h2>Danh sách hoá đơn chi tiết</h2>
         <table class="table">
             <thead>
