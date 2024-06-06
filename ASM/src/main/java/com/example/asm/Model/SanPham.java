@@ -22,7 +22,7 @@ public class SanPham {
     private Integer id;
     @ManyToOne
     @JoinColumn(name = "id_danh_muc")
-    private DanhMuc id_danhMuc;
+    private DanhMuc idDanhMuc;
     @Column(name = "ma_san_pham")
     private String maSP;
     @Column(name = "ten_san_pham")

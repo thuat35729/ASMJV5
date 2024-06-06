@@ -20,7 +20,7 @@ public class HoaDon {
     private Integer id;
     @ManyToOne
     @JoinColumn(name = "id_khach_hang")
-    private KhachHang id_khachHang;
+    private KhachHang idKhachHang;
     @Column(name = "trang_thai")
     private String trangThai;
     @Temporal(TemporalType.DATE)

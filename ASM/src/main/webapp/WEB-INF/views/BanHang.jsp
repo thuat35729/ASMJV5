@@ -6,7 +6,9 @@
     <title>Title</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div class="row">
@@ -28,7 +30,7 @@
                 <tr>
                     <td>${i.index + 1}</td>
                     <td>${hd.id}</td>
-                    <td>${hd.id_khachHang.hoTen}</td>
+                    <td>${hd.idKhachHang.hoTen}</td>
                     <td>${hd.ngayTao}</td>
                     <td>${hd.trangThai}</td>
                     <td>
@@ -58,9 +60,9 @@
                 <tr>
                     <td>${i.index +1}</td>
                     <td>${hdct.id}</td>
-                    <td>${hdct.id_ctsp.id_sanPham.tenSP}</td>
+                    <td>${hdct.idCtsp.idSanPham.tenSP}</td>
                     <td>${hdct.soLuong}</td>
-                    <td>${hdct.id_ctsp.giaBan}</td>
+                    <td>${hdct.idCtsp.giaBan}</td>
                     <td>${hdct.tongTien}</td>
                     <td>
                         <a href="/ban-hang/xoaSP?idHDCT=${hdct.id}">
@@ -91,13 +93,13 @@
                 <div class="mb-3">
                     <label class="col-3">Ten Khach hang</label>
                     <input type="text" class="col-7" readonly
-                           value="${listtthd[0].id_khachHang.hoTen} ${listkh[0].hoTen}">
+                           value="${listtthd[0].idKhachHang.hoTen} ${listkh[0].hoTen}">
                     <input hidden="hidden"
-                           value="${listtthd[0].id_khachHang.id} ${listkh[0].id}" name="id_khachHang">
+                           value="${listtthd[0].idKhachHang.id} ${listkh[0].id}" name="idKhachHang">
                     <input hidden="hidden"
-                           value="${listtthd[0].id_khachHang.diaChi} ${listkh[0].diaChi}" name="diaChi">
+                           value="${listtthd[0].idKhachHang.diaChi} ${listkh[0].diaChi}" name="diaChi">
                     <input hidden="hidden"
-                           value="${listtthd[0].id_khachHang.sdt} ${listkh[0].diaChi}" name="sdt">
+                           value="${listtthd[0].idKhachHang.sdt} ${listkh[0].diaChi}" name="sdt">
                     <p style="color: red">${message}</p>
                 </div>
                 <div class="mb-3">
@@ -144,21 +146,50 @@
             <tr>
                 <td>${i.index + 1}</td>
                 <td>${ctsp.id}</td>
-                <td>${ctsp.id_sanPham.tenSP}</td>
-                <td>${ctsp.id_mauSac.tenMau}</td>
-                <td>${ctsp.id_size.tenSize}</td>
+                <td>${ctsp.idSanPham.tenSP}</td>
+                <td>${ctsp.idMauSac.tenMau}</td>
+                <td>${ctsp.idSize.tenSize}</td>
                 <td>${ctsp.giaBan}</td>
                 <td>${ctsp.soLuongTon}</td>
                 <td>${ctsp.trangThai}</td>
                 <td>
-                    <a href="/ban-hang/them-sp?idSPCT=${ctsp.id}">
-                        <button class="btn btn-primary">Chọn mua</button>
-                    </a>
+                    <button class="btn btn-primary" onclick="openModal(${ctsp.id})">Chọn mua</button>
                 </td>
             </tr>
         </c:forEach>
         </tbody>
+        <div id="quantityModal" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Nhập Số Lượng</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form id="quantityForm" action="/ban-hang/them-sp?idSPCT=${listctsp[0].id}" method="GET">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="soLuong">Số Lượng</label>
+                                <input type="number" class="form-control" id="soLuong" name="soLuong" required>
+                            </div>
+                            <input type="hidden" id="idSPCT" name="idSPCT">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                            <button type="submit" class="btn btn-primary">Xác nhận</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </table>
 </div>
 </body>
+<script>
+    function openModal(idSPCT) {
+        document.getElementById('idSPCT').value = idSPCT;
+        $('#quantityModal').modal('show');
+    }
+</script>
 </html>

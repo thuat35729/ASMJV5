@@ -21,13 +21,13 @@ public class CTSP {
     private Integer id;
     @ManyToOne
     @JoinColumn(name = "id_mau_sac")
-    private MauSac id_mauSac;
+    private MauSac idMauSac;
     @ManyToOne
     @JoinColumn(name = "id_sp")
-    private SanPham id_sanPham;
+    private SanPham idSanPham;
     @ManyToOne
     @JoinColumn(name = "id_size")
-    private Size id_size;
+    private Size idSize;
     @Column(name = "gia_ban")
     private Double giaBan;
     @Column(name = "so_luong_ton")

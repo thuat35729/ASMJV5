@@ -59,8 +59,8 @@
             <td>${sp.trangThai}</td>
             <td>${sp.ngayTao}</td>
             <td>${sp.ngaySua}</td>
-            <td>${sp.id_danhMuc.tenDanhMuc}</td>
-            <td>${sp.id_danhMuc.maDanhMuc}</td>
+            <td>${sp.idDanhMuc.tenDanhMuc}</td>
+            <td>${sp.idDanhMuc.maDanhMuc}</td>
             <td>
                 </button> <a href="/san-pham/delete?id=${sp.id}">
                 <button>Delete</button>

@@ -24,7 +24,7 @@ public class HoaDonCT {
     private HoaDon idHoaDon;
     @ManyToOne
     @JoinColumn(name = "id_ctsp")
-    private CTSP id_ctsp;
+    private CTSP idCtsp;
     @Column(name = "so_luong_mua")
     private Integer soLuong;
     @Column(name = "gia_ban")

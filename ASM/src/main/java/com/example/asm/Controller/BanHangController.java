@@ -28,6 +28,7 @@ public class BanHangController {
     KhachHangRepository khr;
     Integer idHD;
     double tongTien;
+    int soLuongMoi;
 
     public BanHangController() {
         idHD = 0;
@@ -70,7 +71,7 @@ public class BanHangController {
 //    }
     @PostMapping("/ban-hang/them-hd")
     public String themHD(@ModelAttribute("hd") HoaDon hoaDon, Model model) {
-        if (hoaDon.getId_khachHang() == null) {
+        if (hoaDon.getIdKhachHang() == null) {
             model.addAttribute("message", "vui long chon, tim khach hang de tao hoa don");
             model.addAttribute("listhd", hdr.findAll());
             model.addAttribute("listctsp", ctspr.findAll());
@@ -93,23 +94,49 @@ public class BanHangController {
     }
 
     @GetMapping("/ban-hang/them-sp")
-    public String themSP(@RequestParam("idSPCT") Integer idSPCT) {
-        HoaDonCT hoaDonCT = new HoaDonCT();
+    public String themSP(@RequestParam("idSPCT") Integer idSPCT, @RequestParam("soLuong") Integer soLuong) {
+        HoaDonCT hoaDonChiTietTonTai = hdctr.findTop1ByIdCtsp_Id(idSPCT);
         CTSP ctsp = ctspr.findAllById(idSPCT);
         ctsp.setId(idSPCT);
+        HoaDonCT hoaDonCT = new HoaDonCT();
         HoaDon hd = new HoaDon();
         hd.setId(idHD);
-        hoaDonCT.setIdHoaDon(hd);
-        hoaDonCT.setGiaBan(ctsp.getGiaBan());
-        hoaDonCT.setId_ctsp(ctsp);
-        hoaDonCT.setSoLuong(1);
-        hoaDonCT.setTongTien(hoaDonCT.getGiaBan() * hoaDonCT.getSoLuong());
-        hdctr.save(hoaDonCT);
+        boolean productExistsInCurrentOrder = false;
+        for (HoaDonCT hdct : hdctr.findAll()) {
+            if (hdct.getIdHoaDon().getId().equals(idHD) && hdct.getIdCtsp().getId().equals(idSPCT)) {
+                productExistsInCurrentOrder = true;
+                hoaDonChiTietTonTai = hdct;
+                break;
+            }
+        }
+        if (productExistsInCurrentOrder) {
+            soLuongMoi = hoaDonChiTietTonTai.getSoLuong() + soLuong;
+            hoaDonChiTietTonTai.setSoLuong(soLuongMoi);
+            hoaDonChiTietTonTai.setTongTien(hoaDonChiTietTonTai.getGiaBan() * soLuongMoi);
+            ctsp.setSoLuongTon(ctsp.getSoLuongTon() - soLuong);
+            hoaDonChiTietTonTai.setNgaySua(new Date());
+            hdctr.save(hoaDonChiTietTonTai);
+        } else {
+            hoaDonCT.setIdHoaDon(hd);
+            hoaDonCT.setGiaBan(ctsp.getGiaBan());
+            hoaDonCT.setIdCtsp(ctsp);
+            hoaDonCT.setSoLuong(soLuongMoi);
+            hoaDonCT.setTrangThai("Active");
+            hoaDonCT.setNgayTao(new Date());
+            hoaDonCT.setNgaySua(new Date());
+            hoaDonCT.setTongTien(hoaDonCT.getGiaBan() * hoaDonCT.getSoLuong());
+            hdctr.save(hoaDonCT);
+        }
         return "redirect:/ban-hang/view";
     }
 
     @GetMapping("/ban-hang/xoaSP")
     public String xoaSP(@RequestParam("idHDCT") Integer id) {
+        HoaDonCT hdct = hdctr.findAllById(id);
+        soLuongMoi = hdct.getSoLuong();
+        CTSP ctsp = ctspr.findAllById(hdct.getIdCtsp().getId());
+        ctsp.setSoLuongTon(ctsp.getSoLuongTon() + soLuongMoi);
+        ctspr.save(ctsp);
         hdctr.deleteById(id);
         return "redirect:/ban-hang/view";
     }
