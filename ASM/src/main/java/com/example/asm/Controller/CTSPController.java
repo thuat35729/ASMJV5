@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.swing.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Controller
@@ -44,8 +45,8 @@ public class CTSPController {
 
     @PostMapping("/ctsp/add")
     public String add(@ModelAttribute("ctsp") CTSP ctsp, RedirectAttributes redirectAttributes) {
-        ctsp.setNgaySua(new Date());
-        ctsp.setNgayTao(new Date());
+        ctsp.setNgaySua(LocalDateTime.now());
+        ctsp.setNgayTao(LocalDateTime.now());
         ctspr.save(ctsp);
         redirectAttributes.addFlashAttribute("message", "Thêm thành công");
         return "redirect:/ctsp/view";

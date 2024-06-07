@@ -103,8 +103,8 @@
                 <form>
                     <form action="/ban-hang/view" method="get">
                         <div>
-                            <label class="mb-3 col-3" name="sdt">Số điện thoại</label>
-                            <input type="text" class="col-7">
+                            <label class="mb-3 col-3" >Số điện thoại</label>
+                            <input type="text" class="col-7" name="sdt">
                         </div>
                         <button class="btn btn-primary" type="submit">Search</button>
                     </form>

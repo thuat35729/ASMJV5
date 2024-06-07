@@ -14,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.ref.SoftReference;
+import java.time.LocalDateTime;
+import java.time.temporal.TemporalQueries;
 import java.util.Date;
 import java.util.List;
 
@@ -79,15 +81,16 @@ public class BanHangController {
 //        return "BanHang";
 //    }
     @PostMapping("/ban-hang/them-hd")
-    public String themHD(@ModelAttribute("hd") HoaDon hoaDon, Model model) {
+    public String themHD(@ModelAttribute("hd") HoaDon hoaDon, Model model, @RequestParam(value = "sdt", defaultValue = "a") String sdt) {
         if (hoaDon.getIdKhachHang() == null) {
             model.addAttribute("message", "vui long chon, tim khach hang de tao hoa don");
             model.addAttribute("listhd", hdr.findAll());
             model.addAttribute("listctsp", ctspr.findAll());
+            model.addAttribute("listkh", khr.findTop1BySdtLike(sdt));
             return "BanHang";
         }
-        hoaDon.setNgaySua(new Date());
-        hoaDon.setNgayTao(new Date());
+        hoaDon.setNgaySua(LocalDateTime.now());
+        hoaDon.setNgayTao(LocalDateTime.now());
         hoaDon.setTrangThai("Chua Thanh Toan");
         hdr.save(hoaDon);
         return "redirect:/ban-hang/view";
@@ -97,7 +100,7 @@ public class BanHangController {
     public String thanhToan(@RequestParam("idHoaDon") Integer id) {
         HoaDon hd = hdr.findAllById(id);
         hd.setTrangThai("Da Thanh Toan");
-        hd.setNgaySua(new Date());
+        hd.setNgaySua(LocalDateTime.now());
         hdr.save(hd);
         return "redirect:/ban-hang/view";
     }
@@ -123,7 +126,7 @@ public class BanHangController {
             hoaDonChiTietTonTai.setSoLuong(soLuongMoi);
             hoaDonChiTietTonTai.setTongTien(hoaDonChiTietTonTai.getGiaBan() * soLuongMoi);
             ctsp.setSoLuongTon(ctsp.getSoLuongTon() - soLuong);
-            hoaDonChiTietTonTai.setNgaySua(new Date());
+            hoaDonChiTietTonTai.setNgaySua(LocalDateTime.now());
             hdctr.save(hoaDonChiTietTonTai);
 
         } else {
@@ -134,8 +137,8 @@ public class BanHangController {
             hoaDonCT.setIdCtsp(ctsp);
             hoaDonCT.setSoLuong(soLuongMoi);
             hoaDonCT.setTrangThai("Active");
-            hoaDonCT.setNgayTao(new Date());
-            hoaDonCT.setNgaySua(new Date());
+            hoaDonCT.setNgayTao(LocalDateTime.now());
+            hoaDonCT.setNgaySua(LocalDateTime.now());
             hoaDonCT.setTongTien(hoaDonCT.getGiaBan() * hoaDonCT.getSoLuong());
             hdctr.save(hoaDonCT);
         }
@@ -153,5 +156,6 @@ public class BanHangController {
         hdctr.deleteById(id);
         return "redirect:/ban-hang/view";
     }
+
 
 }

@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 @Getter
 @Setter
@@ -23,12 +24,12 @@ public class HoaDon {
     private KhachHang idKhachHang;
     @Column(name = "trang_thai")
     private String trangThai;
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "ngay_tao")
-    private Date ngayTao;
-    @Temporal(TemporalType.DATE)
+    private LocalDateTime ngayTao;
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "ngay_sua")
-    private Date ngaySua;
+    private LocalDateTime ngaySua;
     @Column(name ="dia_chi")
     private String diaChi;
     @Column(name="so_dien_thoai")
