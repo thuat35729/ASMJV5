@@ -46,12 +46,12 @@
     <tr>
         <th>STT</th>
         <th>ID</th>
-        <th>ma size</th>
-        <th>ten size</th>
-        <th>trang thai</th>
-        <th>ngay tao</th>
-        <th>ngay sua</th>
-        <th>thao tac</th>
+        <th>Mã kích cỡ</th>
+        <th>Tên kích cỡ</th>
+        <th>Trạng thái </th>
+        <th>Ngày tạo</th>
+        <th>Ngày sửa</th>
+        <th>Thao tác</th>
     </tr>
     </thead>
     <tbody>
@@ -66,10 +66,10 @@
             <td>${a.ngayTao}</td>
             <td>${a.ngaySua}</td>
             <td>
-                <a class="btn btn-warning" href="/size/detal?id=${a.id}">CHI TIET</a>
+                <a class="btn btn-warning" href="/size/detal?id=${a.id}">CHI TIẾT</a>
             </td>
             <td>
-                <a class="btn btn-warning" href="/size/delete?id=${a.id}">XOA</a>
+                <a class="btn btn-warning" href="/size/delete?id=${a.id}">XÓA</a>
             </td>
         </tr>
     </c:forEach>

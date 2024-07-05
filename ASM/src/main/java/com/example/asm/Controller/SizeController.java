@@ -14,6 +14,6 @@ public class SizeController {
     @RequestMapping("/size/view")
     public String view(Model model) {
         model.addAttribute("listsz", sizeRepository.findAll());
-        return "Size";
+        return "KichCo";
     }
 }

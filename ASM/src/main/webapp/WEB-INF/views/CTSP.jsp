@@ -21,7 +21,7 @@
         </c:forEach>
     </select>
     <p>Ten Mau</p>
-    <select name="idMauSac">
+    <select name="idMauSac" class="form-control">
         <c:forEach items="${listmau}" var="mau">
             <option value="${mau.id}">
                     ${mau.tenMau}
@@ -29,7 +29,7 @@
         </c:forEach>
     </select>
     <p>Ten Size</p>
-    <select name="idSize">
+    <select name="idSize" class="form-control">
         <c:forEach items="${listsize}" var="s">
             <option value="${s.id}">
                     ${s.tenSize}
@@ -37,11 +37,22 @@
         </c:forEach>
     </select>
     <p>Gia Ban</p>
-    <input type="text" name="giaBan"><br><p style="color: red">${errorGiaBan}</p>
+    <input type="text" name="giaBan" class="form-control"><br><p style="color: red">${errorGiaBan}</p>
     <p>So Luong</p>
-    <input type="text" name="soLuongTon"><br><p style="color: red">${errorSoLuong}</p>
+    <input type="text" name="soLuongTon" class="form-control"><br><p style="color: red">${errorSoLuong}</p>
     <p>Trang Thai</p>
-    <input type="text" name="trangThai"><br>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="trangThai" id="flexRadioDefault1" value="Active">
+        <label class="form-check-label" for="flexRadioDefault1">
+           Active
+        </label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="trangThai" id="flexRadioDefault2" checked value="Inactive">
+        <label class="form-check-label" for="flexRadioDefault2">
+            Inactive
+        </label>
+    </div>
     <button type="submit" class="btn btn-info" onclick="return confirm('Co Muon Them Khong')">ADD</button>
 </form>
 <table border="2" class="table">

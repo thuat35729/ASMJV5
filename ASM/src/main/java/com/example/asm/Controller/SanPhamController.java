@@ -41,14 +41,16 @@ public class SanPhamController {
                        //@RequestParam(value = "view", required = false) String view,
                        Model model) {
 //         if ("submit".equals(view)) {
-        Pageable pageable = PageRequest.of(pageNo, 2);
-        Page<SanPham> page = spr.findAll(pageable);
-        model.addAttribute("page", page);
+        Pageable pageable = PageRequest.of(pageNo, 5);
+        Page<SanPham> page = spr.findAllByOrderByNgayTaoDesc(pageable);
+        model.addAttribute("page", page.getContent());
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPage", page.getTotalPages());
         model.addAttribute("listdm", dmr.findAll());
 //        viewTable = view;
 //         }
 //        model.addAttribute("view", viewTable);
-        return "viewSP";
+        return "SanPham";
     }
 
 
@@ -61,7 +63,7 @@ public class SanPhamController {
     }
 
     @PostMapping("/san-pham/update")
-    public String update(@ModelAttribute("sp") SanPham sanPham, @RequestParam("id") Integer id) {
+    public String update(@ModelAttribute SanPham sanPham, @RequestParam("id") Integer id) {
 //        SanPham sp = spr.findAllById(id);
 //        sp.setMaSP(sanPham.getMaSP());
 //        sp.setTenSP(sanPham.getTenSP());
@@ -85,7 +87,7 @@ public class SanPhamController {
         model.addAttribute("listdm", dmr.findAll());
         SanPham sp = spr.findAllById(id);
         model.addAttribute("listsp", sp);
-        return "DetailSanPham";
+        return "Detail/DetailSanPham";
     }
 
 }
