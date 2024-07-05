@@ -12,6 +12,9 @@ import java.util.List;
 public interface HoaDonRepository extends JpaRepository<HoaDon, Integer> {
     List<HoaDon> findTop1ById(Integer id);
 
+    List<HoaDon> findAllByOrderByNgayTaoDesc();
+
     HoaDon findAllById(Integer id);
+
     Page<HoaDon> findAllByOrderByNgayTaoDesc(Pageable pageable);
 }

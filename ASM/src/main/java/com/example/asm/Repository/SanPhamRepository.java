@@ -11,9 +11,6 @@ import java.util.List;
 @Repository
 public interface SanPhamRepository extends JpaRepository<SanPham, Integer> {
     List<SanPham> findAllByOrderByNgayTaoDesc();
-
-
     SanPham findAllById(Integer id);
-
     Page<SanPham> findAllByOrderByNgayTaoDesc(Pageable pageable);
 }
