@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.swing.*;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Objects;
 
 @Controller
 public class CTSPController {
@@ -44,13 +45,35 @@ public class CTSPController {
     }
 
     @PostMapping("/ctsp/add")
-    public String add(@ModelAttribute("ctsp") CTSP ctsp, RedirectAttributes redirectAttributes) {
+    public String add(@ModelAttribute CTSP ctsp, RedirectAttributes redirectAttributes, Model model,
+                      @RequestParam(value = "pageNo", defaultValue = "0") Integer pageNo) {
+        Pageable pageable = PageRequest.of(pageNo, 2);
+        Page<CTSP> page = ctspr.findAll(pageable);
+        model.addAttribute("page", page);
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("listctsp", ctspr.findAll());
+        model.addAttribute("listsp", spr.findAll());
+        model.addAttribute("listsize", sizer.findAll());
+        model.addAttribute("listmau", mr.findAll());
+        boolean check = true;
+        if (Objects.isNull(ctsp.getGiaBan()) || ctsp.getGiaBan() <= 0) {
+            model.addAttribute("errorGiaBan", "Gia ban phai > 0");
+            check = false;
+        }
+        if (Objects.isNull(ctsp.getSoLuongTon()) || ctsp.getSoLuongTon() <= 0) {
+            model.addAttribute("errorSoLuong", "So Luong phai > 0");
+            check = false;
+        }
+        if (!check) {
+            return "CTSP";
+        }
         ctsp.setNgaySua(LocalDateTime.now());
         ctsp.setNgayTao(LocalDateTime.now());
         ctspr.save(ctsp);
         redirectAttributes.addFlashAttribute("message", "Thêm thành công");
         return "redirect:/ctsp/view";
     }
+
 
     @GetMapping("/ctsp/delete")
     public String delete(@RequestParam("id") Integer id) {

@@ -14,30 +14,30 @@
 
 </head>
 <body>
-<form action="/khachhang/add" method="post">
+<form action="/khach-hang/add" method="post">
     <div class="mb-3">
         <label class="form-label"> Ho ten </label>
-        <input type="text" class="form-control" name="hoten" >
+        <input type="text" class="form-control" name="hoTen">
     </div>
     <div class="mb-3">
         <label class="form-label">Dia chi </label>
-        <input type="text" class="form-control" name="diachi" >
+        <input type="text" class="form-control" name="diaChi">
     </div>
     <div class="mb-3">
         <label class="form-label">SDT </label>
-        <input type="text" class="form-control" name="sdt" >
+        <input type="text" class="form-control" name="sdt">
     </div>
     <div class="row">
         <p class="col-4">Trang thai
         </p>
         <div class="form-check col-4">
-            <input class="form-check-input" type="radio" value="Active" name="trangthai">
+            <input class="form-check-input" type="radio" value="Active" name="trangThai">
             <label class="form-check-label">
                 Active
             </label>
         </div>
         <div class="form-check col-4">
-            <input class="form-check-input" type="radio" value="Inactive" name="trangthai">
+            <input class="form-check-input" type="radio" value="Inactive" name="trangThai">
             <label class="form-check-label">
                 Inactive
             </label>
@@ -73,10 +73,10 @@
             <td>${a.ngayTao}</td>
             <td>${a.ngaySua}</td>
             <td>
-                <a class="btn btn-warning" href="/khachhang/detal?id=${a.id}">CHI TIET</a>
+                <a class="btn btn-warning" href="/khach-hang/detal?id=${a.id}">CHI TIET</a>
             </td>
             <td>
-                <a class="btn btn-warning" href="/khachhang/delete?id=${a.id}">XOA</a>
+                <a class="btn btn-warning" href="/khach-hang/delete?id=${a.id}">XOA</a>
             </td>
 
         </tr>

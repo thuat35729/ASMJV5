@@ -99,6 +99,7 @@ public class BanHangController {
     @GetMapping("/ban-hang/thanh-toan")
     public String thanhToan(@RequestParam("idHoaDon") Integer id) {
         HoaDon hd = hdr.findAllById(id);
+        HoaDonCT hdct = hdctr.findTop1ByIdHoaDon_Id(id);
         hd.setTrangThai("Da Thanh Toan");
         hd.setNgaySua(LocalDateTime.now());
         hdr.save(hd);
@@ -109,6 +110,11 @@ public class BanHangController {
     public String themSP(@RequestParam("idSPCT") Integer idSPCT, @RequestParam("soLuong") Integer soLuong) {
         HoaDonCT hoaDonChiTietTonTai = hdctr.findTop1ByIdCtsp_Id(idSPCT);
         CTSP ctsp = ctspr.findAllById(idSPCT);
+        if (ctsp.getSoLuongTon() <= soLuong) {
+            soLuong = ctsp.getSoLuongTon();
+            ctsp.setTrangThai("Inactive");
+            ctspr.save(ctsp);
+        }
         ctsp.setId(idSPCT);
         HoaDonCT hoaDonCT = new HoaDonCT();
         HoaDon hd = new HoaDon();
@@ -143,7 +149,7 @@ public class BanHangController {
             hdctr.save(hoaDonCT);
         }
 
-        return "redirect:/ban-hang/view";
+        return "redirect:/ban-hang/view?id=" + idHD;
     }
 
     @GetMapping("/ban-hang/xoaSP")
@@ -154,7 +160,7 @@ public class BanHangController {
         ctsp.setSoLuongTon(ctsp.getSoLuongTon() + soLuongMoi);
         ctspr.save(ctsp);
         hdctr.deleteById(id);
-        return "redirect:/ban-hang/view";
+        return "redirect:/ban-hang/view?id=" + idHD;
     }
 
 

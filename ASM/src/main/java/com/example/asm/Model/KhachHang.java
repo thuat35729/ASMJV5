@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
@@ -28,7 +29,7 @@ public class KhachHang {
     @Column(name = "trang_thai")
     private String trangThai;
     @Column(name = "ngay_tao")
-    private Date ngayTao;
+    private LocalDate ngayTao;
     @Column(name = "ngay_sua")
-    private Date ngaySua;
+    private LocalDate ngaySua;
 }

@@ -9,6 +9,5 @@ import java.util.List;
 @Repository
 public interface CTSPRespository extends JpaRepository<CTSP, Integer> {
     CTSP findAllById(Integer id);
-
     List<CTSP> findAllByTrangThaiLike(String trangThai);
 }

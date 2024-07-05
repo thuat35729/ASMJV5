@@ -13,7 +13,7 @@
 <body>
 <form action="/ctsp/add" method="post">
     <p>Ten San Pham</p>
-    <select name="id_sanPham">
+    <select name="idSanPham" class="form-control">
         <c:forEach items="${listsp}" var="sp">
             <option value="${sp.id}">
                     ${sp.tenSP}
@@ -21,7 +21,7 @@
         </c:forEach>
     </select>
     <p>Ten Mau</p>
-    <select name="id_mauSac">
+    <select name="idMauSac">
         <c:forEach items="${listmau}" var="mau">
             <option value="${mau.id}">
                     ${mau.tenMau}
@@ -29,7 +29,7 @@
         </c:forEach>
     </select>
     <p>Ten Size</p>
-    <select name="id_size">
+    <select name="idSize">
         <c:forEach items="${listsize}" var="s">
             <option value="${s.id}">
                     ${s.tenSize}
@@ -37,9 +37,9 @@
         </c:forEach>
     </select>
     <p>Gia Ban</p>
-    <input type="text" name="giaBan"><br>
+    <input type="text" name="giaBan"><br><p style="color: red">${errorGiaBan}</p>
     <p>So Luong</p>
-    <input type="text" name="soLuong"><br>
+    <input type="text" name="soLuongTon"><br><p style="color: red">${errorSoLuong}</p>
     <p>Trang Thai</p>
     <input type="text" name="trangThai"><br>
     <button type="submit" class="btn btn-info" onclick="return confirm('Co Muon Them Khong')">ADD</button>
@@ -65,9 +65,9 @@
         <tr>
             <td>${i.index + 1}</td>
             <td>${ctsp.id}</td>
-            <td>${ctsp.id_sanPham.tenSP}</td>
-            <td>${ctsp.id_mauSac.tenMau}</td>
-            <td>${ctsp.id_size.tenSize}</td>
+            <td>${ctsp.idSanPham.tenSP}</td>
+            <td>${ctsp.idMauSac.tenMau}</td>
+            <td>${ctsp.idSize.tenSize}</td>
             <td>${ctsp.giaBan}</td>
             <td>${ctsp.soLuongTon}</td>
             <td>${ctsp.trangThai}</td>

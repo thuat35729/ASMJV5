@@ -11,6 +11,6 @@ import java.util.List;
 public interface HoaDonChiTietRepository extends JpaRepository<HoaDonCT, Integer> {
     List<HoaDonCT> findByIdHoaDon_Id(Integer idHoaDon);
     HoaDonCT findTop1ByIdCtsp_Id(Integer idCTSP);
-
     HoaDonCT findAllById(Integer id);
+    HoaDonCT findTop1ByIdHoaDon_Id(Integer idHoaDon);
 }

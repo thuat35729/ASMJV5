@@ -20,10 +20,11 @@
             <tr>
                 <td>STT</td>
                 <td>ID</td>
-                <td>Ten khach hang</td>
-                <td>Ngay tao</td>
-                <td>Trang Thai</td>
-                <td>Chuc nang</td>
+                <td>Tên khách hàng</td>
+                <td>Số điện thoại</td>
+                <td>Ngày tạo</td>
+                <td>Trạng Thái</td>
+                <td>Chức năng</td>
             </tr>
             </thead>
             <tbody>
@@ -32,6 +33,7 @@
                     <td>${i.index + 1}</td>
                     <td>${hd.id}</td>
                     <td>${hd.idKhachHang.hoTen}</td>
+                    <td>${hd.idKhachHang.sdt}</td>
                     <td>${hd.ngayTao}</td>
                     <td>${hd.trangThai}</td>
                     <td>
@@ -70,11 +72,11 @@
             <tr>
                 <td>STT</td>
                 <td>ID</td>
-                <td>Ten san pham</td>
-                <td>So luong</td>
-                <td>Gia ban</td>
-                <td>Tong tien</td>
-                <td>Chuc nang</td>
+                <td>Tên sản phẩm</td>
+                <td>Số lượng</td>
+                <td>Giá bán</td>
+                <td>Tổng tiền</td>
+                <td>Chức năng</td>
             </tr>
             </thead>
             <tbody>
@@ -88,7 +90,7 @@
                     <td>${hdct.tongTien}</td>
                     <td>
                         <a href="/ban-hang/xoaSP?idHDCT=${hdct.id}">
-                            <button class="btn btn-danger">DELETE</button>
+                            <button class="btn btn-danger">Xoa</button>
                         </a>
                     </td>
                 </tr>
@@ -107,6 +109,9 @@
                             <input type="text" class="col-7" name="sdt">
                         </div>
                         <button class="btn btn-primary" type="submit">Search</button>
+                        <a href="/khach-hang/view">
+                            <button type="button" class="btn btn-primary">Thông tin khách hàng</button>
+                        </a>
                     </form>
                 </form>
             </div>
@@ -153,14 +158,14 @@
         <thead>
         <tr>
             <td>STT</td>
-            <td>ID CTSP</td>
-            <td>Ten san pham</td>
-            <td>Mau sac</td>
-            <td>Size</td>
-            <td>Gia ban</td>
-            <td>So luong ton</td>
-            <td>Trang Thai</td>
-            <td>Chuc nang</td>
+            <td>ID</td>
+            <td>Tên sản phẩm</td>
+            <td>Màu sắc</td>
+            <td>Kích cỡ</td>
+            <td>Giá bán</td>
+            <td>Số lượng tồn</td>
+            <td>Trạng Thái</td>
+            <td>Chức năng</td>
         </tr>
         </thead>
         <tbody>
