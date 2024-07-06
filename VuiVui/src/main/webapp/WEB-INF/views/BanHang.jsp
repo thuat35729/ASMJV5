@@ -11,7 +11,29 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
+<style>
+    .notification {
+        display: none; /* Ẩn mặc định */
+        position: fixed;
+        top: 20px;
+        right: 500px;
+        background-color: #f44336; /* Màu nền đỏ */
+        color: white;
+        padding: 16px;
+        border-radius: 8px;
+        z-index: 1000; /* Đảm bảo thông báo ở trên cùng */
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .notification.show {
+        display: block; /* Hiển thị khi có lỗi */
+    }
+</style>
 <body>
+
+    <div id="errorNotification" class="notification">
+        <h2 id="errorText"></h2>
+    </div>
 <div class="row">
     <div class="col-7">
         <h2>Danh sách hoá đơn</h2>
@@ -217,6 +239,25 @@
     function openModal(idSPCT) {
         document.getElementById('idSPCT').value = idSPCT;
         $('#quantityModal').modal('show');
+    }
+</script>
+<script>
+    // Giả sử biến errorSoLuong được định nghĩa trong script
+    var errorSoLuong = "${errorSoLuong}"; // Thay thế bằng giá trị thực tế
+
+    // Hàm hiển thị thông báo lỗi
+    function showErrorNotification(message) {
+        var notification = document.getElementById('errorNotification');
+        var errorText = document.getElementById('errorText');
+        errorText.textContent = message;
+        notification.classList.add('show');
+
+        setTimeout(() => {
+            notification.classList.remove('show');
+        }, 5000);
+    }
+    if (errorSoLuong) {
+        showErrorNotification(errorSoLuong);
     }
 </script>
 </html>

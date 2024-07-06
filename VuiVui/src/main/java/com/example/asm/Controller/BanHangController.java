@@ -123,11 +123,19 @@ public class BanHangController {
     }
 
     @GetMapping("/ban-hang/them-sp")
-    public String themSP(@RequestParam("idSPCT") Integer idSPCT, @RequestParam("soLuong") Integer soLuong, Model model) {
+    public String themSP(@RequestParam("idSPCT") Integer idSPCT, @RequestParam("soLuong") Integer soLuong, Model model,
+                         @RequestParam(value = "pageNo", defaultValue = "0") Integer pageNo) {
         HoaDonCT hoaDonChiTietTonTai = hdctr.findTop1ByIdCtsp_Id(idSPCT);
         CTSP ctsp = ctspr.findAllById(idSPCT);
+        Pageable pageable = PageRequest.of(pageNo, 5);
+        Page<HoaDon> page = hdr.findAllByOrderByNgayTaoDesc(pageable);
+        model.addAttribute("listhd", page.getContent());
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPage", page.getTotalPages());
+        model.addAttribute("listctsp", ctspr.findAllByTrangThaiLike("Active"));
         if (soLuong > ctsp.getSoLuongTon()) {
             model.addAttribute("errorSoLuong", "Không được nhập số lượng lớn hơn số lượng tồn");
+            return "BanHang";
         }
         if (ctsp.getSoLuongTon() == 0) {
             soLuong = ctsp.getSoLuongTon();
