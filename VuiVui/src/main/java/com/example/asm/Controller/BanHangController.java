@@ -34,11 +34,12 @@ public class BanHangController {
     KhachHangRepository khr;
     Integer idHD;
     double tongTien;
+    String trangThai;
 
     public BanHangController() {
         idHD = 0;
         tongTien = 0;
-
+        trangThai = null;
     }
 
     @RequestMapping("/ban-hang/view")
@@ -64,6 +65,7 @@ public class BanHangController {
             ) {
                 if (hd.getId().equals(hdct.getIdHoaDon().getId())) {
                     tongTienHoaDon += hdct.getTongTien();
+                    trangThai = hd.getTrangThai();
                 }
             }
 
@@ -180,8 +182,19 @@ public class BanHangController {
     }
 
     @GetMapping("/ban-hang/xoaSP")
-    public String xoaSP(@RequestParam("idHDCT") Integer id) {
+    public String xoaSP(@RequestParam("idHDCT") Integer id, Model model, @RequestParam(value = "pageNo", defaultValue = "0") Integer pageNo) {
         HoaDonCT hdct = hdctr.findAllById(id);
+        HoaDon hd = hdr.findAllById(id);
+        if (trangThai.equals("Da Thanh Toan")) {
+            Pageable pageable = PageRequest.of(pageNo, 5);
+            Page<HoaDon> page = hdr.findAllByOrderByNgayTaoDesc(pageable);
+            model.addAttribute("listhd", page.getContent());
+            model.addAttribute("currentPage", pageNo);
+            model.addAttribute("totalPage", page.getTotalPages());
+            model.addAttribute("listctsp", ctspr.findAllByTrangThaiLike("Active"));
+            model.addAttribute("errorXoaSP", "Hoa don da duoc thanh toan khong the xoa san pham khoi hoa don");
+            return "BanHang";
+        }
         int soLuongMoi = hdct.getSoLuong();
         CTSP ctsp = ctspr.findAllById(hdct.getIdCtsp().getId());
         ctsp.setSoLuongTon(ctsp.getSoLuongTon() + soLuongMoi);

@@ -16,7 +16,7 @@
         display: none; /* Ẩn mặc định */
         position: fixed;
         top: 20px;
-        right: 500px;
+        right: 400px;
         background-color: #f44336; /* Màu nền đỏ */
         color: white;
         padding: 16px;
@@ -34,6 +34,7 @@
     <div id="errorNotification" class="notification">
         <h2 id="errorText"></h2>
     </div>
+<%--    <h2>${erorrXoaSP}</h2>--%>
 <div class="row">
     <div class="col-7">
         <h2>Danh sách hoá đơn</h2>
@@ -242,10 +243,8 @@
     }
 </script>
 <script>
-    // Giả sử biến errorSoLuong được định nghĩa trong script
     var errorSoLuong = "${errorSoLuong}"; // Thay thế bằng giá trị thực tế
-
-    // Hàm hiển thị thông báo lỗi
+    var errorXoaSanPham = "${errorXoaSP}"
     function showErrorNotification(message) {
         var notification = document.getElementById('errorNotification');
         var errorText = document.getElementById('errorText');
@@ -258,6 +257,9 @@
     }
     if (errorSoLuong) {
         showErrorNotification(errorSoLuong);
+    }
+    if(errorXoaSanPham){
+        showErrorNotification(errorXoaSanPham)
     }
 </script>
 </html>
