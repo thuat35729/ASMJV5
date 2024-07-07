@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -23,24 +24,24 @@
 <body>
 <%--<form:form></form:form>--%>
 <form action="/san-pham/add" method="post">
-    <p>Ma San Pham</p>
+    <p>Mã sản phẩm</p>
     <input type="text" name="maSP" class="form-control"><br>
-    <p>Ten San Pham</p>
+    <p>Tên sản phẩm</p>
     <input type="text" name="tenSP" class="form-control"><br>
     <p>Trang Thai</p>
     <div class="form-check">
-        <input class="form-check-input" type="radio" name="trangThai" id="flexRadioDefault1" value="Active">
+        <input class="form-check-input" type="radio" name="trangThai" id="flexRadioDefault1" value="Còn hàng">
         <label class="form-check-label" for="flexRadioDefault1">
-            Active
+            Còn hàng
         </label>
     </div>
     <div class="form-check">
-        <input class="form-check-input" type="radio" name="trangThai" id="flexRadioDefault2" checked value="Inactive">
+        <input class="form-check-input" type="radio" name="trangThai" id="flexRadioDefault2" checked value="Hết hàng">
         <label class="form-check-label" for="flexRadioDefault2">
-            Inactive
+            Hết hàng
         </label>
     </div>
-    <p>Ma Danh Muc</p>
+    <p>Tên danh mục</p>
     <select name="idDanhMuc" class="form-control">
         <c:forEach items="${listdm}" var="dm">
             <option value="${dm.id}">
@@ -48,7 +49,7 @@
             </option>
         </c:forEach>
     </select>
-    <button type="submit" class="btn btn-success">ADD</button>
+    <button type="submit" class="btn btn-success">Thêm</button>
 
 </form>
 <table border="2" class="table">
@@ -79,10 +80,10 @@
             <td>${sp.idDanhMuc.maDanhMuc}</td>
             <td>
                 <a href="/san-pham/delete?id=${sp.id}">
-                    <button class="btn btn-primary">Delete</button>
+                    <button class="btn btn-primary">Xóa</button>
                 </a>
                 <a href="/san-pham/detail?id=${sp.id}">
-                    <button class="btn btn-warning">Update</button>
+                    <button class="btn btn-warning">Chi tiết</button>
                 </a>
             </td>
         </tr>
@@ -99,7 +100,7 @@
             <ul class="pagination">
                 <li class="page-item">
                     <c:if test="${currentPage > 0}">
-                        <a class="page-link" href="/san-pham/view?pageNo=${currentPage - 1}">Previous</a>
+                        <a class="page-link" href="/san-pham/view?pageNo=${currentPage - 1}"><<</a>
                     </c:if>
                 </li>
                 <c:forEach var="i" begin="1" end="${totalPage}">
@@ -109,7 +110,7 @@
                 </c:forEach>
                 <li class="page-item">
                     <c:if test="${currentPage < totalPage - 1}">
-                        <a class="page-link" href="/san-pham/view?pageNo=${currentPage + 1}">Next</a>
+                        <a class="page-link" href="/san-pham/view?pageNo=${currentPage + 1}">>></a>
                     </c:if>
                 </li>
             </ul>

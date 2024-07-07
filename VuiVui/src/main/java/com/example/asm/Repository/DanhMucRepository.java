@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DanhMucRepository extends JpaRepository<DanhMuc, Integer> {
-
+    DanhMuc findAllById(Integer id);
 }

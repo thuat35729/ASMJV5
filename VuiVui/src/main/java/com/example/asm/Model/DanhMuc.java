@@ -6,27 +6,30 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
+
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="danh_muc")
+@Table(name = "danh_muc")
 public class DanhMuc {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name = "id")
     private Integer id;
-    @Column(name="ma_danh_muc")
+    @Column(name = "ma_danh_muc")
     private String maDanhMuc;
-    @Column(name="ten_danh_muc")
+    @Column(name = "ten_danh_muc")
     private String tenDanhMuc;
-    @Column(name="trang_thai")
+    @Column(name = "trang_thai")
     private String trangThai;
-    @Column(name="ngay_tao")
-    private Date ngayTao;
-    @Column(name="ngay_sua")
-    private Date ngaySua;
+    @Column(name = "ngay_tao")
+    private LocalDateTime ngayTao;
+    @Column(name = "ngay_sua")
+    private LocalDateTime ngaySua;
 
 }

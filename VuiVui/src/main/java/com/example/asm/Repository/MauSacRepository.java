@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MauSacRepository extends JpaRepository<MauSac, Integer> {
+    MauSac findAllById(Integer id);
 }

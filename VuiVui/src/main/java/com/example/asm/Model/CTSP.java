@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,7 +27,7 @@ public class CTSP {
     private SanPham idSanPham;
     @ManyToOne
     @JoinColumn(name = "id_size")
-    private Size idSize;
+    private KichCo idSize;
     @Column(name = "gia_ban")
     private Double giaBan;
     @Column(name = "so_luong_ton")

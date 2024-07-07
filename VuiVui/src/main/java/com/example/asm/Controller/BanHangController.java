@@ -51,7 +51,7 @@ public class BanHangController {
         model.addAttribute("listhd", page.getContent());
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPage", page.getTotalPages());
-        model.addAttribute("listctsp", ctspr.findAllByTrangThaiLike("Active"));
+        model.addAttribute("listctsp", ctspr.findAllByTrangThaiLike("Còn hàng"));
         model.addAttribute("listkh", khr.findTop1BySdtLike(sdt));
         idHD = id;
         //model.addAttribute("listtthd", hdr.findById(id));
@@ -109,7 +109,7 @@ public class BanHangController {
         model.addAttribute("listhd", page.getContent());
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPage", page.getTotalPages());
-        model.addAttribute("listctsp", ctspr.findAllByTrangThaiLike("Active"));
+        model.addAttribute("listctsp", ctspr.findAllByTrangThaiLike("Còn hàng"));
         if (idHoaDon == 0) {
             model.addAttribute("errorThanhToan", "Vui long chon hoa don can thanh toan");
             return "BanHang";
@@ -134,14 +134,14 @@ public class BanHangController {
         model.addAttribute("listhd", page.getContent());
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPage", page.getTotalPages());
-        model.addAttribute("listctsp", ctspr.findAllByTrangThaiLike("Active"));
+        model.addAttribute("listctsp", ctspr.findAllByTrangThaiLike("Còn hàng"));
         if (soLuong > ctsp.getSoLuongTon()) {
             model.addAttribute("errorSoLuong", "Không được nhập số lượng lớn hơn số lượng tồn");
             return "BanHang";
         }
         if (ctsp.getSoLuongTon() == 0) {
             soLuong = ctsp.getSoLuongTon();
-            ctsp.setTrangThai("Inactive");
+            ctsp.setTrangThai("Hết hàng");
             ctspr.save(ctsp);
         }
         ctsp.setId(idSPCT);
@@ -191,7 +191,7 @@ public class BanHangController {
             model.addAttribute("listhd", page.getContent());
             model.addAttribute("currentPage", pageNo);
             model.addAttribute("totalPage", page.getTotalPages());
-            model.addAttribute("listctsp", ctspr.findAllByTrangThaiLike("Active"));
+            model.addAttribute("listctsp", ctspr.findAllByTrangThaiLike("Còn hàng"));
             model.addAttribute("errorXoaSP", "Hoa don da duoc thanh toan khong the xoa san pham khoi hoa don");
             return "BanHang";
         }

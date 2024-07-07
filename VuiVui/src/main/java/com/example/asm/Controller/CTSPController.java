@@ -4,7 +4,7 @@ import com.example.asm.Model.CTSP;
 import com.example.asm.Repository.CTSPRespository;
 import com.example.asm.Repository.MauSacRepository;
 import com.example.asm.Repository.SanPhamRepository;
-import com.example.asm.Repository.SizeRepository;
+import com.example.asm.Repository.KichCoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,9 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.swing.*;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Objects;
 
 @Controller
@@ -26,7 +24,7 @@ public class CTSPController {
     @Autowired
     SanPhamRepository spr;
     @Autowired
-    SizeRepository sizer;
+    KichCoRepository sizer;
     @Autowired
     MauSacRepository mr;
 

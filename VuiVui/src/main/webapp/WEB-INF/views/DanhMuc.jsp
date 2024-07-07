@@ -17,28 +17,28 @@
             crossorigin="anonymous"></script>
 </head>
 <body class="container">
-<form action="/DanhMuc/Add" method="post">
+<form action="/danh-muc/add" method="post">
     <p>
         Ma Danh Muc
     </p>
-    <input type="text" name="maDM" class="from-control">
+    <input type="text" name="maDanhMuc" class="from-control">
     <p>
         Ten Danh Muc
     </p>
-    <input type="text" name="tenDM" class="from-control">
+    <input type="text" name="tenDanhMuc" class="from-control">
     <p>
         Trang Thai
     </p>
     <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="trangthai" id="inlineRadio1" value="Active">
-        <label class="form-check-label" for="inlineRadio1">Active</label>
+        <input class="form-check-input" type="radio" name="trangThai" id="inlineRadio1" value="Còn hàng">
+        <label class="form-check-label" for="inlineRadio1">Còn hàng</label>
     </div>
     <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="trangthai" id="inlineRadio2" value="Inactive">
-        <label class="form-check-label" for="inlineRadio2">Inactive</label>
+        <input class="form-check-input" type="radio" name="trangThai" id="inlineRadio2" value="Hết hàng" checked>
+        <label class="form-check-label" for="inlineRadio2">Hết hàng</label>
     </div>
     <div>
-        <button type="submit" class="btn btn-success">ADD</button>
+        <button type="submit" class="btn btn-success">Thêm</button>
     </div>
 
 </form>
@@ -75,10 +75,10 @@
             </td>
             <td>
                 <a href="/danh-muc/delete?id=${a.id}">
-                    <button class="btn btn-danger">Delete</button>
+                    <button class="btn btn-danger">Xóa</button>
                 </a>
                 <a href="/danh-muc/detail?id=${a.id}">
-                    <button class="btn btn-warning">Detail</button>
+                    <button class="btn btn-warning">Chi Tiết</button>
                 </a>
             </td>
         </tr>

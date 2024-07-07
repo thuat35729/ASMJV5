@@ -31,13 +31,17 @@
 </style>
 <body>
 
-    <div id="errorNotification" class="notification">
-        <h2 id="errorText"></h2>
-    </div>
-<%--    <h2>${erorrXoaSP}</h2>--%>
+<div id="errorNotification" class="notification">
+    <h2 id="errorText"></h2>
+</div>
 <div class="row">
     <div class="col-7">
         <h2>Danh sách hoá đơn</h2>
+        <a href="/hoa-don/view">
+            <button class="btn btn-primary">
+                Danh sách hóa đơn
+            </button>
+        </a>
         <table class="table">
             <thead>
             <tr>
@@ -245,6 +249,7 @@
 <script>
     var errorSoLuong = "${errorSoLuong}"; // Thay thế bằng giá trị thực tế
     var errorXoaSanPham = "${errorXoaSP}"
+
     function showErrorNotification(message) {
         var notification = document.getElementById('errorNotification');
         var errorText = document.getElementById('errorText');
@@ -255,10 +260,11 @@
             notification.classList.remove('show');
         }, 5000);
     }
+
     if (errorSoLuong) {
         showErrorNotification(errorSoLuong);
     }
-    if(errorXoaSanPham){
+    if (errorXoaSanPham) {
         showErrorNotification(errorXoaSanPham)
     }
 </script>
