@@ -8,5 +8,7 @@ import java.util.List;
 
 @Repository
 public interface KichCoRepository extends JpaRepository<KichCo, Integer> {
-    List<Object> findAllById(Integer id);
+   // List<KichCo> findAllById(Integer id);
+
+    KichCo findAllById(Integer id);
 }

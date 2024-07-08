@@ -39,7 +39,7 @@ public class CTSPController {
         model.addAttribute("listsize", sizer.findAll());
         model.addAttribute("listmau", mr.findAll());
         model.addAttribute("test", sizer.findAllById(id));
-        return "CTSP";
+        return "ChiTietSanPham";
     }
 
     @PostMapping("/ctsp/add")
@@ -63,7 +63,7 @@ public class CTSPController {
             check = false;
         }
         if (!check) {
-            return "CTSP";
+            return "ChiTietSanPham";
         }
         ctsp.setNgaySua(LocalDateTime.now());
         ctsp.setNgayTao(LocalDateTime.now());

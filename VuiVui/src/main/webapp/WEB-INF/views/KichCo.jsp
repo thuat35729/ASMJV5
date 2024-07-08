@@ -6,36 +6,37 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Title</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
 </head>
 <body>
-<form action="/size/add" method="post">
+<form action="/kich-co/add" method="post">
     <div class="mb-3">
-        <label class="form-label">Ma </label>
-        <input type="text" class="form-control" name="masize" >
+        <label class="form-label">Mã kích cỡ </label>
+        <input type="text" class="form-control" name="maSize">
     </div>
     <div class="mb-3">
-        <label class="form-label">Ten </label>
-        <input type="text" class="form-control" name="tensize" >
+        <label class="form-label">Tên kích cỡ </label>
+        <input type="text" class="form-control" name="tenSize">
     </div>
     <div class="row">
-        <p class="col-4">Trang thai
+        <p class="col-4">Trạng thái
         </p>
         <div class="form-check col-4">
-            <input class="form-check-input" type="radio" value="Active" name="trangthai">
+            <input class="form-check-input" type="radio" value="Hoạt động" name="trangThai">
             <label class="form-check-label">
-                Active
+                Hoạt động
             </label>
         </div>
         <div class="form-check col-4">
-            <input class="form-check-input" type="radio" value="Inactive" name="trangthai">
+            <input class="form-check-input" type="radio" value="Ngưng hoạt động" name="trangThai">
             <label class="form-check-label">
-                Inactive
+                Ngưng hoạt động
             </label>
         </div>
     </div>
@@ -48,7 +49,7 @@
         <th>ID</th>
         <th>Mã kích cỡ</th>
         <th>Tên kích cỡ</th>
-        <th>Trạng thái </th>
+        <th>Trạng thái</th>
         <th>Ngày tạo</th>
         <th>Ngày sửa</th>
         <th>Thao tác</th>
@@ -66,10 +67,10 @@
             <td>${a.ngayTao}</td>
             <td>${a.ngaySua}</td>
             <td>
-                <a class="btn btn-warning" href="/size/detal?id=${a.id}">CHI TIẾT</a>
+                <a class="btn btn-warning" href="/kich-co/detal?id=${a.id}">CHI TIẾT</a>
             </td>
             <td>
-                <a class="btn btn-warning" href="/size/delete?id=${a.id}">XÓA</a>
+                <a class="btn btn-warning" href="/kich-co/delete?id=${a.id}">XÓA</a>
             </td>
         </tr>
     </c:forEach>

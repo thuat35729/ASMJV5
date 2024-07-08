@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Controller
@@ -56,8 +57,8 @@ public class SanPhamController {
 
     @PostMapping("/san-pham/add")
     public String add(@ModelAttribute("sp") SanPham sanPham) {
-        sanPham.setNgayTao(new Date());
-        sanPham.setNgaySua(new Date());
+        sanPham.setNgayTao(LocalDateTime.now());
+        sanPham.setNgaySua(LocalDateTime.now());
         spr.save(sanPham);
         return "redirect:/san-pham/view";
     }
@@ -69,7 +70,9 @@ public class SanPhamController {
 //        sp.setTenSP(sanPham.getTenSP());
 //        sp.setTrangThai(sanPham.getTrangThai());
 //        sp.setId_danhMuc(sanPham.getId_danhMuc());
-        sanPham.setNgaySua(new Date());
+        SanPham sp = spr.findAllById(id);
+        sanPham.setNgaySua(LocalDateTime.now());
+        sanPham.setNgayTao(sp.getNgayTao());
         spr.save(sanPham);
         return "redirect:/san-pham/view";
     }

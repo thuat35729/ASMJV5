@@ -9,31 +9,24 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+<h1 class="text-center">Thông tin chi tiết màu sắc</h1>
 <body>
-<h1 class="text-center">Thông tin chi tiết kích cỡ</h1>
-<form method="post" action="/kich-co/update?id=${listKC.id}">
-    <p>
-        Mã kích cỡ
-    </p>
-    <input type="text" name="maSize" value="${listKC.maSize}">
-    <p>
-        Tên kích cỡ
-    </p>
-    <input type="text" name="maSize" value="${listKC.maSize}">
-    <p>
-        Trang thái
-    </p>
-    <
+<form action="/mau-sac/update?id=${listMau.id}" method="post">
+    <p>Mã màu</p>
+    <input type="text" value="${listMau.maMau}" name="maMau">
+    <p>Tên màu</p>
+    <input type="text" value="${listMau.tenMau}" name="tenMau">
+    <p>trang Thái</p>
     <div class="form-check col-4">
         <input class="form-check-input" type="radio" value="Hoạt động" name="trangThai"
-               <c:if test="${listKC.trangThai ='Hoạt động'}">checked</c:if>>
+               <c:if test="${listMau.trangThai ='Hoạt động'}">checked</c:if>>
         <label class="form-check-label">
             Hoạt động
         </label>
     </div>
     <div class="form-check col-4">
         <input class="form-check-input" type="radio" value="Ngưng hoạt động" name="trangThai"
-               <c:if test="${listKC.trangThai ='Ngưng hoạt động'}">checked</c:if>>
+               <c:if test="${listMau.trangThai ='Ngưng hoạt động'}">checked</c:if>>
         <label class="form-check-label">
             Ngưng hoạt động
         </label>

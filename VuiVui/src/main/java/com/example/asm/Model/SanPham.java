@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.xml.crypto.Data;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
@@ -30,7 +31,7 @@ public class SanPham {
     @Column(name = "trang_thai")
     private String trangThai;
     @Column(name = "ngay_tao")
-    private Date ngayTao;
+    private LocalDateTime ngayTao;
     @Column(name = "ngay_sua")
-    private Date ngaySua;
+    private LocalDateTime ngaySua;
 }

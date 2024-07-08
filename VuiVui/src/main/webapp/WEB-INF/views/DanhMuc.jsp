@@ -30,12 +30,12 @@
         Trang Thai
     </p>
     <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="trangThai" id="inlineRadio1" value="Còn hàng">
-        <label class="form-check-label" for="inlineRadio1">Còn hàng</label>
+        <input class="form-check-input" type="radio" name="trangThai" id="inlineRadio1" value="Hoạt động">
+        <label class="form-check-label" for="inlineRadio1">Hoạt động</label>
     </div>
     <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="trangThai" id="inlineRadio2" value="Hết hàng" checked>
-        <label class="form-check-label" for="inlineRadio2">Hết hàng</label>
+        <input class="form-check-input" type="radio" name="trangThai" id="inlineRadio2" value="Ngưng hoạt động" checked>
+        <label class="form-check-label" for="inlineRadio2">Ngưng hoạt động</label>
     </div>
     <div>
         <button type="submit" class="btn btn-success">Thêm</button>

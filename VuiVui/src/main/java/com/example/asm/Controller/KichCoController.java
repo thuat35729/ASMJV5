@@ -39,7 +39,9 @@ public class KichCoController {
         return "Detail/DetailKichCo";
     }
     @GetMapping("/kich-co/update")
-    public String update(@ModelAttribute KichCo kichCo){
+    public String update(@ModelAttribute KichCo kichCo, @RequestParam("id") Integer id){
+        KichCo kc = kichCoRepository.findAllById(id);
+        kichCo.setNgayTao(kc.getNgayTao());
         kichCo.setNgaySua(LocalDateTime.now());
         kichCoRepository.save(kichCo);
         return "redirect:/kich-co/view";

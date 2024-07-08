@@ -51,7 +51,7 @@ public class BanHangController {
         model.addAttribute("listhd", page.getContent());
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPage", page.getTotalPages());
-        model.addAttribute("listctsp", ctspr.findAllByTrangThaiLike("Còn hàng"));
+        model.addAttribute("listctsp", ctspr.findAllByTrangThaiLike("Active")); //Còn hàng
         model.addAttribute("listkh", khr.findTop1BySdtLike(sdt));
         idHD = id;
         //model.addAttribute("listtthd", hdr.findById(id));
@@ -101,7 +101,8 @@ public class BanHangController {
 
     @GetMapping("/ban-hang/thanh-toan")
     public String thanhToan(@RequestParam(value = "idHoaDon", defaultValue = "0") Integer idHoaDon, Model model,
-                            @RequestParam(value = "pageNo", defaultValue = "0") Integer pageNo) {
+                            @RequestParam(value = "pageNo", defaultValue = "0") Integer pageNo,
+                            @RequestParam(value = "tienKhachDua", defaultValue = "0") Double tienKhachDua) {
         HoaDon hd = hdr.findAllById(idHoaDon);
         HoaDonCT hdct = hdctr.findTop1ByIdHoaDon_Id(idHoaDon);
         Pageable pageable = PageRequest.of(pageNo, 5);
@@ -116,6 +117,10 @@ public class BanHangController {
         }
         if (hdct == null || hdct.getTongTien() == null) {
             model.addAttribute("errorThanhToan", "Ban phai them san pham vao gio hang");
+            return "BanHang";
+        }
+        if (tienKhachDua < tongTien) {
+            model.addAttribute("errorThanhToan", "So tien thanh toan chua du");
             return "BanHang";
         }
         hd.setTrangThai("Da Thanh Toan");
@@ -171,7 +176,7 @@ public class BanHangController {
             hoaDonCT.setGiaBan(ctsp.getGiaBan());
             hoaDonCT.setIdCtsp(ctsp);
             hoaDonCT.setSoLuong(soLuongMoi);
-            hoaDonCT.setTrangThai("Active");
+            hoaDonCT.setTrangThai("Còn hàng");
             hoaDonCT.setNgayTao(LocalDateTime.now());
             hoaDonCT.setNgaySua(LocalDateTime.now());
             hoaDonCT.setTongTien(hoaDonCT.getGiaBan() * hoaDonCT.getSoLuong());
@@ -202,6 +207,4 @@ public class BanHangController {
         hdctr.deleteById(id);
         return "redirect:/ban-hang/view?id=" + idHD;
     }
-
-
 }

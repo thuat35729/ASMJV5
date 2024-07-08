@@ -167,7 +167,10 @@
                     <input type="text" class="col-7" readonly
                            value="${tongTienHD}">
                 </div>
-
+                <div class="mb-3">
+                    <label class="col-3">Tiền khách đưa</label>
+                    <input type="text" class="col-7" name="tienKhachDua">
+                </div>
                 <div>
                     <button class="btn btn-primary" type="submit">Tạo hoá đơn</button>
                     <a href="/ban-hang/thanh-toan?idHoaDon=${listtthd[0].id}">

@@ -13,9 +13,10 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Chi tiết danh mục</title>
 </head>
 <body>
+<h1 class="text-center">Thông tin chi tiết danh mục</h1>
 <form method="post" action="/danh-muc/update?id=${listDM.id}">
     <p>Mã danh mục</p>
     <input type="text" name="maDanhMuc" value="${listDM.maDanhMuc}">
