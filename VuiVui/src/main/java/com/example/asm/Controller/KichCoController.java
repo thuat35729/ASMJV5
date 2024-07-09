@@ -14,36 +14,36 @@ public class KichCoController {
     @Autowired
     KichCoRepository kichCoRepository;
 
-    @RequestMapping("/kich-co/view")
-    public String view(Model model) {
+    @RequestMapping("/kich-co/hien-thi")
+    public String danhSachKichCo(Model model) {
         model.addAttribute("listsz", kichCoRepository.findAll());
         return "KichCo";
     }
 
-    @PostMapping("/kich-co/add")
-    public String add(@ModelAttribute KichCo kc) {
+    @PostMapping("/kich-co/them")
+    public String themKichCo(@ModelAttribute KichCo kc) {
         kc.setNgaySua(LocalDateTime.now());
         kc.setNgayTao(LocalDateTime.now());
         kichCoRepository.save(kc);
-        return "redirect:/kich-co/view";
+        return "redirect:/kich-co/hien-thi";
     }
 
-    @GetMapping("/kich-co/delete")
-    public String delete(@RequestParam("id") Integer id) {
+    @GetMapping("/kich-co/xoa")
+    public String xoaKichCo(@RequestParam("id") Integer id) {
         kichCoRepository.deleteById(id);
-        return "redirect:/kich-co/view";
+        return "redirect:/kich-co/hien-thi";
     }
-    @GetMapping("/kich-co/detail")
-    public String detail(@RequestParam("id") Integer id, Model model){
+    @GetMapping("/kich-co/chi-tiet")
+    public String chiTietKichCo(@RequestParam("id") Integer id, Model model){
         model.addAttribute("listKC", kichCoRepository.findAllById(id));
         return "Detail/DetailKichCo";
     }
-    @GetMapping("/kich-co/update")
-    public String update(@ModelAttribute KichCo kichCo, @RequestParam("id") Integer id){
+    @GetMapping("/kich-co/sua")
+    public String suaKichCo(@ModelAttribute KichCo kichCo, @RequestParam("id") Integer id){
         KichCo kc = kichCoRepository.findAllById(id);
         kichCo.setNgayTao(kc.getNgayTao());
         kichCo.setNgaySua(LocalDateTime.now());
         kichCoRepository.save(kichCo);
-        return "redirect:/kich-co/view";
+        return "redirect:/kich-co/hien-thi";
     }
 }

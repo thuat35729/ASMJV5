@@ -15,7 +15,7 @@
 
 </head>
 <body>
-<form action="/kich-co/add" method="post">
+<form action="/kich-co/them" method="post">
     <div class="mb-3">
         <label class="form-label">Mã kích cỡ </label>
         <input type="text" class="form-control" name="maSize">
@@ -40,7 +40,7 @@
             </label>
         </div>
     </div>
-    <button type="submit" class="btn btn-success">Submit</button>
+    <button type="submit" class="btn btn-success">Thêm</button>
 </form>
 <table class="table">
     <thead>
@@ -67,10 +67,10 @@
             <td>${a.ngayTao}</td>
             <td>${a.ngaySua}</td>
             <td>
-                <a class="btn btn-warning" href="/kich-co/detal?id=${a.id}">CHI TIẾT</a>
+                <a class="btn btn-warning" href="/kich-co/chi-tiet?id=${a.id}">Chi Tiết</a>
             </td>
             <td>
-                <a class="btn btn-warning" href="/kich-co/delete?id=${a.id}">XÓA</a>
+                <a class="btn btn-warning" href="/kich-co/xoa?id=${a.id}">Xóa</a>
             </td>
         </tr>
     </c:forEach>

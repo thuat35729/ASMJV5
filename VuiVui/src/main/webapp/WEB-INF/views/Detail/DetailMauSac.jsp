@@ -11,7 +11,7 @@
 </head>
 <h1 class="text-center">Thông tin chi tiết màu sắc</h1>
 <body>
-<form action="/mau-sac/update?id=${listMau.id}" method="post">
+<form action="/mau-sac/sua?id=${listMau.id}" method="post">
     <p>Mã màu</p>
     <input type="text" value="${listMau.maMau}" name="maMau">
     <p>Tên màu</p>

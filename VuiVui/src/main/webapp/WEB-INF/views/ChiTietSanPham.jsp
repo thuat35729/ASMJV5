@@ -12,8 +12,8 @@
     <title>Document</title>
 </head>
 <body>
-<form action="/ctsp/add" method="post">
-    <p>Ten San Pham</p>
+<form action="/ctsp/them" method="post">
+    <p>Tên sản phẩm</p>
     <select name="idSanPham" class="form-control">
         <c:forEach items="${listsp}" var="sp">
             <option value="${sp.id}">
@@ -21,7 +21,7 @@
             </option>
         </c:forEach>
     </select>
-    <p>Ten Mau</p>
+    <p>Tên màu</p>
     <select name="idMauSac" class="form-control">
         <c:forEach items="${listmau}" var="mau">
             <option value="${mau.id}">
@@ -29,7 +29,7 @@
             </option>
         </c:forEach>
     </select>
-    <p>Ten Size</p>
+    <p>Kích cỡ</p>
     <select name="idSize" class="form-control">
         <c:forEach items="${listsize}" var="s">
             <option value="${s.id}">
@@ -37,39 +37,50 @@
             </option>
         </c:forEach>
     </select>
-    <p>Gia Ban</p>
-    <input type="text" name="giaBan" class="form-control"><br><p style="color: red">${errorGiaBan}</p>
-    <p>So Luong</p>
-    <input type="text" name="soLuongTon" class="form-control"><br><p style="color: red">${errorSoLuong}</p>
-    <p>Trang Thai</p>
+    <p>Cổ áo</p>
+    <select name="idCoAo" class="form-control">
+        <c:forEach items="${listCoAo}" var="s">
+            <option value="${s.id}">
+                    ${s.tenCoAo}
+            </option>
+        </c:forEach>
+    </select>
+    <p>Giá bán</p>
+    <input type="text" name="giaBan" class="form-control"><br>
+    <p style="color: red">${errorGiaBan}</p>
+    <p>Số lượng</p>
+    <input type="text" name="soLuongTon" class="form-control"><br>
+    <p style="color: red">${errorSoLuong}</p>
+    <p>Trạng thái</p>
     <div class="form-check">
-        <input class="form-check-input" type="radio" name="trangThai" id="flexRadioDefault1" value="Active">
+        <input class="form-check-input" type="radio" name="trangThai" id="flexRadioDefault1" value="Còn hàng">
         <label class="form-check-label" for="flexRadioDefault1">
-           Active
+            Còn hàng
         </label>
     </div>
     <div class="form-check">
-        <input class="form-check-input" type="radio" name="trangThai" id="flexRadioDefault2" checked value="Inactive">
+        <input class="form-check-input" type="radio" name="trangThai" id="flexRadioDefault2" checked value="Hết hàng">
         <label class="form-check-label" for="flexRadioDefault2">
-            Inactive
+            Hết hàng
         </label>
     </div>
-    <button type="submit" class="btn btn-info" onclick="return confirm('Co Muon Them Khong')">ADD</button>
+    <button type="submit" class="btn btn-info" onclick="return confirm('Co Muon Them Khong')">Thêm</button>
 </form>
 <table border="2" class="table">
     <thead>
     <tr>
         <td>STT</td>
         <td>id</td>
-        <td>Ten San Pham</td>
-        <td>Mau Sac</td>
-        <td>Size</td>
-        <td>Gia Ban</td>
-        <td>So Luong</td>
-        <td>Trang Thai</td>
-        <td>Ngay Tao</td>
-        <td>Ngay Sua</td>
-
+        <td>Tên sản phẩm</td>
+        <td>Màu sắc</td>
+        <td>Kích cỡ</td>
+        <td>Cổ áo</td>
+        <td>Giá bán</td>
+        <td>Số lượng</td>
+        <td>Trạng thái</td>
+        <td>Ngày tạo</td>
+        <td>Ngày sửa</td>
+        <td>Hành động</td>
     </tr>
     </thead>
     <tbody>
@@ -80,18 +91,18 @@
             <td>${ctsp.idSanPham.tenSP}</td>
             <td>${ctsp.idMauSac.tenMau}</td>
             <td>${ctsp.idSize.tenSize}</td>
+            <td>${ctsp.idCoAo.tenCoAo}</td>
             <td>${ctsp.giaBan}</td>
             <td>${ctsp.soLuongTon}</td>
             <td>${ctsp.trangThai}</td>
             <td>${ctsp.ngayTao}</td>
             <td>${ctsp.ngaySua}</td>
-
             <td>
-                </button> <a href="/ctsp/delete?id=${ctsp.id}">
-                <button class="btn btn-danger">Delete</button>
+                </button> <a href="/ctsp/xoa?id=${ctsp.id}">
+                <button class="btn btn-danger">Xóa</button>
             </a>
-                <a href="/ctsp/detail?id=${ctsp.id}">
-                    <button class="btn btn-warning">Update</button>
+                <a href="/ctsp/chi-tiet?id=${ctsp.id}">
+                    <button class="btn btn-warning">Chi Tiết</button>
                 </a>
             </td>
         </tr>
@@ -105,17 +116,17 @@
         <ul class="pagination">
             <li class="page-item">
                 <c:if test="${currentPage > 0}">
-                    <a class="page-link" href="/ctsp/view?pageNo=${currentPage - 1}">Previous</a>
+                    <a class="page-link" href="/ctsp/hien-thi?pageNo=${currentPage - 1}">Previous</a>
                 </c:if>
             </li>
             <c:forEach var="i" begin="1" end="${page.totalPages}">
                 <li class="page-item ${i == currentPage + 1 ? 'active' : ''}">
-                    <a class="page-link" href="/ctsp/view?pageNo=${i - 1}">${i}</a>
+                    <a class="page-link" href="/ctsp/hien-thi?pageNo=${i - 1}">${i}</a>
                 </li>
             </c:forEach>
             <li class="page-item">
                 <c:if test="${currentPage < page.totalPages - 1}">
-                    <a class="page-link" href="/ctsp/view?pageNo=${currentPage + 1}">Next</a>
+                    <a class="page-link" href="/ctsp/hien-thi?pageNo=${currentPage + 1}">Next</a>
                 </c:if>
             </li>
         </ul>

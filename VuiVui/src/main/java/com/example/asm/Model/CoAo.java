@@ -8,33 +8,21 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
-@Table(name = "ctsp")
-public class CTSP {
+@Table(name = "co_ao")
+public class CoAo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
+    @Column(name = "id")
     private Integer id;
-    @ManyToOne
-    @JoinColumn(name = "id_mau_sac")
-    private MauSac idMauSac;
-    @ManyToOne
-    @JoinColumn(name = "id_sp")
-    private SanPham idSanPham;
-    @ManyToOne
-    @JoinColumn(name = "id_size")
-    private KichCo idSize;
-    @ManyToOne
-    @JoinColumn(name = "id_co_ao")
-    private CoAo idCoAo;
-    @Column(name = "gia_ban")
-    private Double giaBan;
-    @Column(name = "so_luong_ton")
-    private Integer soLuongTon;
+    @Column(name = "ma_co_ao")
+    private String maCoAo;
+    @Column(name = "ten_co_ao")
+    private String tenCoAo;
     @Column(name = "trang_thai")
     private String trangThai;
     @Column(name = "ngay_tao")

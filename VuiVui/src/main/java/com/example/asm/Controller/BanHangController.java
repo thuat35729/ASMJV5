@@ -29,7 +29,7 @@ public class BanHangController {
     @Autowired
     HoaDonChiTietRepository hdctr;
     @Autowired
-    CTSPRespository ctspr;
+    CTSPRepository ctspr;
     @Autowired
     KhachHangRepository khr;
     Integer idHD;
@@ -42,8 +42,8 @@ public class BanHangController {
         trangThai = null;
     }
 
-    @RequestMapping("/ban-hang/view")
-    public String view(Model model, @RequestParam(value = "id", defaultValue = "0") Integer id,
+    @RequestMapping("/ban-hang/hien-thi")
+    public String HienThi(Model model, @RequestParam(value = "id", defaultValue = "0") Integer id,
                        @RequestParam(value = "sdt", defaultValue = "a") String sdt,
                        @RequestParam(value = "pageNo", defaultValue = "0") Integer pageNo) {
         Pageable pageable = PageRequest.of(pageNo, 5);
@@ -51,7 +51,7 @@ public class BanHangController {
         model.addAttribute("listhd", page.getContent());
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPage", page.getTotalPages());
-        model.addAttribute("listctsp", ctspr.findAllByTrangThaiLike("Active")); //Còn hàng
+        model.addAttribute("listctsp", ctspr.findAllByTrangThaiLike("Còn hàng"));
         model.addAttribute("listkh", khr.findTop1BySdtLike(sdt));
         idHD = id;
         //model.addAttribute("listtthd", hdr.findById(id));
@@ -96,7 +96,7 @@ public class BanHangController {
         hoaDon.setNgayTao(LocalDateTime.now());
         hoaDon.setTrangThai("Chua Thanh Toan");
         hdr.save(hoaDon);
-        return "redirect:/ban-hang/view";
+        return "redirect:/ban-hang/hien-thi";
     }
 
     @GetMapping("/ban-hang/thanh-toan")
@@ -126,7 +126,7 @@ public class BanHangController {
         hd.setTrangThai("Da Thanh Toan");
         hd.setNgaySua(LocalDateTime.now());
         hdr.save(hd);
-        return "redirect:/ban-hang/view";
+        return "redirect:/ban-hang/hien-thi";
     }
 
     @GetMapping("/ban-hang/them-sp")
@@ -183,7 +183,7 @@ public class BanHangController {
             hdctr.save(hoaDonCT);
         }
 
-        return "redirect:/ban-hang/view?id=" + idHD;
+        return "redirect:/ban-hang/hien-thi?id=" + idHD;
     }
 
     @GetMapping("/ban-hang/xoaSP")
@@ -205,6 +205,6 @@ public class BanHangController {
         ctsp.setSoLuongTon(ctsp.getSoLuongTon() + soLuongMoi);
         ctspr.save(ctsp);
         hdctr.deleteById(id);
-        return "redirect:/ban-hang/view?id=" + idHD;
+        return "redirect:/ban-hang/hien-thi?id=" + idHD;
     }
 }

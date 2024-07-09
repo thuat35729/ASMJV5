@@ -15,7 +15,7 @@
 
 </head>
 <body>
-<form action="/mau-sac/add" method="post">
+<form action="/mau-sac/them" method="post">
     <div class="mb-3">
         <label class="form-label">Ma </label>
         <input type="text" class="form-control" name="maMau">
@@ -67,8 +67,8 @@
             <td>${a.ngayTao}</td>
             <td>${a.ngaySua}</td>
             <td>
-                <a class="btn btn-danger" href="/mau-sac/detail?id=${a.id}">Chi tiết</a>
-                <a class="btn btn-warning" href="/mau-sac/delete?id=${a.id}">Xóa</a>
+                <a class="btn btn-danger" href="/mau-sac/chi-tiet?id=${a.id}">Chi tiết</a>
+                <a class="btn btn-warning" href="/mau-sac/xoa?id=${a.id}">Xóa</a>
             </td>
         </tr>
     </c:forEach>

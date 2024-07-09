@@ -18,26 +18,26 @@ public class KhachHangController {
     @Autowired
     KhachHangRepository khachHangRepository;
 
-    @RequestMapping(value = "/khach-hang/view")
-    public void view(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @RequestMapping(value = "/khach-hang/hien-thi")
+    public void danhSachKhachHang(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uri = request.getRequestURI();
-        if (uri.equals("/khach-hang/view")) {
+        if (uri.equals("/khach-hang/hien-thi")) {
             request.setAttribute("listkh", khachHangRepository.findAll());
             request.getRequestDispatcher("/WEB-INF/views/KhachHang.jsp").forward(request, response);
         }
     }
 
-    @PostMapping("/khach-hang/add")
-    public void add(@ModelAttribute KhachHang khachHang,HttpServletResponse response) throws IOException {
+    @PostMapping("/khach-hang/them")
+    public void themKhachHang(@ModelAttribute KhachHang khachHang,HttpServletResponse response) throws IOException {
         khachHang.setNgayTao(LocalDate.now());
         khachHang.setNgaySua(LocalDate.now());
         khachHangRepository.save(khachHang);
-        response.sendRedirect("/khach-hang/view");
+        response.sendRedirect("/khach-hang/hien-thi");
     }
 
-    @GetMapping("/khach-hang/delete")
-    public String delete(@RequestParam("id") Integer id) {
+    @GetMapping("/khach-hang/xoa")
+    public String xoaKhachHang(@RequestParam("id") Integer id) {
         khachHangRepository.deleteById(id);
-        return "redirect:/khach-hang/view";
+        return "redirect:/khach-hang/hien-thi";
     }
 }

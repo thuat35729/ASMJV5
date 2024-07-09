@@ -17,7 +17,7 @@
             crossorigin="anonymous"></script>
 </head>
 <body class="container">
-<form action="/danh-muc/add" method="post">
+<form action="/danh-muc/them" method="post">
     <p>
         Ma Danh Muc
     </p>
@@ -74,10 +74,10 @@
                     ${a.ngaySua}
             </td>
             <td>
-                <a href="/danh-muc/delete?id=${a.id}">
+                <a href="/danh-muc/xoa?id=${a.id}">
                     <button class="btn btn-danger">Xóa</button>
                 </a>
-                <a href="/danh-muc/detail?id=${a.id}">
+                <a href="/danh-muc/chi-tiet?id=${a.id}">
                     <button class="btn btn-warning">Chi Tiết</button>
                 </a>
             </td>

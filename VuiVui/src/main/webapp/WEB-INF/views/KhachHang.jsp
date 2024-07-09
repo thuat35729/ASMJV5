@@ -14,7 +14,7 @@
 
 </head>
 <body>
-<form action="/khach-hang/add" method="post">
+<form action="/khach-hang/them" method="post">
     <div class="mb-3">
         <label class="form-label"> Ho ten </label>
         <input type="text" class="form-control" name="hoTen">
@@ -73,10 +73,10 @@
             <td>${a.ngayTao}</td>
             <td>${a.ngaySua}</td>
             <td>
-                <a class="btn btn-warning" href="/khach-hang/detal?id=${a.id}">CHI TIET</a>
+                <a class="btn btn-warning" href="/khach-hang/chi-tiet?id=${a.id}">Chi Tiết</a>
             </td>
             <td>
-                <a class="btn btn-warning" href="/khach-hang/delete?id=${a.id}">XOA</a>
+                <a class="btn btn-warning" href="/khach-hang/xoa?id=${a.id}">Xóa</a>
             </td>
 
         </tr>

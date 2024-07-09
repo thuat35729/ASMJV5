@@ -23,7 +23,7 @@
 <%--<c:if test="${view == 'submit'}">--%>
 <body>
 <%--<form:form></form:form>--%>
-<form action="/san-pham/add" method="post">
+<form action="/san-pham/them" method="post">
     <p>Mã sản phẩm</p>
     <input type="text" name="maSP" class="form-control"><br>
     <p>Tên sản phẩm</p>
@@ -79,11 +79,11 @@
             <td>${sp.idDanhMuc.tenDanhMuc}</td>
             <td>${sp.idDanhMuc.maDanhMuc}</td>
             <td>
-                <a href="/san-pham/delete?id=${sp.id}">
+                <a href="/san-pham/xoa?id=${sp.id}">
                     <button class="btn btn-primary">Xóa</button>
                 </a>
-                <a href="/san-pham/detail?id=${sp.id}">
-                    <button class="btn btn-warning">Chi tiết</button>
+                <a href="/san-pham/chi-tiet?id=${sp.id}">
+                    <button class="btn btn-warning">Chi Tiết</button>
                 </a>
             </td>
         </tr>
@@ -100,17 +100,17 @@
             <ul class="pagination">
                 <li class="page-item">
                     <c:if test="${currentPage > 0}">
-                        <a class="page-link" href="/san-pham/view?pageNo=${currentPage - 1}"><<</a>
+                        <a class="page-link" href="/san-pham/hien-thi?pageNo=${currentPage - 1}"><<</a>
                     </c:if>
                 </li>
                 <c:forEach var="i" begin="1" end="${totalPage}">
                     <li class="page-item ${i == currentPage + 1 ? 'active' : ''}">
-                        <a class="page-link" href="/san-pham/view?pageNo=${i - 1}">${i}</a>
+                        <a class="page-link" href="/san-pham/hien-thi?pageNo=${i - 1}">${i}</a>
                     </li>
                 </c:forEach>
                 <li class="page-item">
                     <c:if test="${currentPage < totalPage - 1}">
-                        <a class="page-link" href="/san-pham/view?pageNo=${currentPage + 1}">>></a>
+                        <a class="page-link" href="/san-pham/hien-thi?pageNo=${currentPage + 1}">>></a>
                     </c:if>
                 </li>
             </ul>

@@ -14,36 +14,36 @@ public class DanhMucController {
     @Autowired
     DanhMucRepository danhMucRepository;
 
-    @RequestMapping("/danh-muc/view")
-    public String view(Model model) {
+    @RequestMapping("/danh-muc/hien-thi")
+    public String danhSachDanhMuc(Model model) {
         model.addAttribute("listdm", danhMucRepository.findAll());
         return "DanhMuc";
     }
 
-    @PostMapping("/danh-muc/add")
-    public String add(@ModelAttribute DanhMuc danhMuc) {
+    @PostMapping("/danh-muc/them")
+    public String themDanhMuc(@ModelAttribute DanhMuc danhMuc) {
         danhMuc.setNgaySua(LocalDateTime.now());
         danhMuc.setNgayTao(LocalDateTime.now());
         danhMucRepository.save(danhMuc);
-        return "redirect:/danh-muc/view";
+        return "redirect:/danh-muc/hien-thi";
     }
 
-    @GetMapping("/danh-muc/delete")
-    public String delete(@RequestParam("id") Integer id) {
+    @GetMapping("/danh-muc/xoa")
+    public String xoaDanhMuc(@RequestParam("id") Integer id) {
         danhMucRepository.deleteById(id);
-        return "redirect:/danh-muc/view";
+        return "redirect:/danh-muc/hien-thi";
     }
 
-    @GetMapping("/danh-muc/detail")
-    public String detail(Model model, @RequestParam("id") Integer id) {
+    @GetMapping("/danh-muc/chi-tiet")
+    public String chiTietDanhMuc(Model model, @RequestParam("id") Integer id) {
         model.addAttribute("listDM", danhMucRepository.findAllById(id));
         return "Detail/DetailDanhMuc";
     }
 
-    @PostMapping("/danh-muc/update")
-    public String update(@ModelAttribute DanhMuc danhMuc) {
+    @PostMapping("/danh-muc/sua")
+    public String suaDanhMuc(@ModelAttribute DanhMuc danhMuc) {
         danhMuc.setNgaySua(LocalDateTime.now());
         danhMucRepository.save(danhMuc);
-        return "redirect:/danh-muc/view";
+        return "redirect:/danh-muc/hien-thi";
     }
 }

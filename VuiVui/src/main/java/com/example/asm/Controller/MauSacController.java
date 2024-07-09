@@ -14,38 +14,38 @@ public class MauSacController {
     @Autowired
     MauSacRepository mauSacRepository;
 
-    @RequestMapping("/mau-sac/view")
-    public String view(Model model) {
+    @RequestMapping("/mau-sac/hien-thi")
+    public String danhSachmauSac(Model model) {
         model.addAttribute("listms", mauSacRepository.findAll());
         return "Mau";
     }
 
-    @PostMapping("/mau-sac/add")
-    public String add(@ModelAttribute MauSac mauSac) {
+    @PostMapping("/mau-sac/them")
+    public String themMauSac(@ModelAttribute MauSac mauSac) {
         mauSac.setNgaySua(LocalDateTime.now());
         mauSac.setNgayTao(LocalDateTime.now());
         mauSacRepository.save(mauSac);
-        return "redirect:/mau-sac/view";
+        return "redirect:/mau-sac/hien-thi";
     }
 
-    @GetMapping("/mau-sac/delete")
-    public String delete(@RequestParam("id") Integer id) {
+    @GetMapping("/mau-sac/xoa")
+    public String xoaMauSac(@RequestParam("id") Integer id) {
         mauSacRepository.deleteById(id);
-        return "redirect:/mau-sac/view";
+        return "redirect:/mau-sac/hien-thi";
     }
 
-    @GetMapping("/mau-sac/detail")
-    public String detail(Model model, @RequestParam("id") Integer id) {
+    @GetMapping("/mau-sac/chi-tiet")
+    public String chiTietMauSac(Model model, @RequestParam("id") Integer id) {
         model.addAttribute("listMau", mauSacRepository.findAllById(id));
         return "Detail/DetailMauSac";
     }
 
-    @PostMapping("/mau-sac/update")
-    public String update(@ModelAttribute MauSac mauSac, @RequestParam("id") Integer id) {
+    @PostMapping("/mau-sac/sua")
+    public String suaMauSac(@ModelAttribute MauSac mauSac, @RequestParam("id") Integer id) {
         MauSac ms = mauSacRepository.findAllById(id);
         mauSac.setNgaySua(LocalDateTime.now());
         mauSac.setNgayTao(ms.getNgayTao());
         mauSacRepository.save(mauSac);
-        return "redirect:/mau-sac/view";
+        return "redirect:/mau-sac/hien-thi";
     }
 }

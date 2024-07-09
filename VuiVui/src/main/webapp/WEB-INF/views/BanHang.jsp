@@ -37,7 +37,7 @@
 <div class="row">
     <div class="col-7">
         <h2>Danh sách hoá đơn</h2>
-        <a href="/hoa-don/view">
+        <a href="/hoa-don/hien-thi">
             <button class="btn btn-primary">
                 Danh sách hóa đơn
             </button>
@@ -64,7 +64,7 @@
                     <td>${hd.ngayTao}</td>
                     <td>${hd.trangThai}</td>
                     <td>
-                        <a href="/ban-hang/view?id=${hd.id}">
+                        <a href="/ban-hang/hien-thi?id=${hd.id}">
                             <button class="btn btn-info">Chon</button>
                         </a>
                     </td>
@@ -77,17 +77,17 @@
                 <ul class="pagination">
                     <li class="page-item">
                         <c:if test="${currentPage > 0}">
-                            <a class="page-link" href="/ban-hang/view?pageNo=${currentPage - 1}">Previous</a>
+                            <a class="page-link" href="/ban-hang/hien-thi?pageNo=${currentPage - 1}">Previous</a>
                         </c:if>
                     </li>
                     <c:forEach var="i" begin="1" end="${totalPage}">
                         <li class="page-item ${i == currentPage + 1 ? 'active' : ''}">
-                            <a class="page-link" href="/ban-hang/view?pageNo=${i - 1}">${i}</a>
+                            <a class="page-link" href="/ban-hang/hien-thi?pageNo=${i - 1}">${i}</a>
                         </li>
                     </c:forEach>
                     <li class="page-item">
                         <c:if test="${currentPage < totalPage - 1}">
-                            <a class="page-link" href="/ban-hang/view?pageNo=${currentPage + 1}">Next</a>
+                            <a class="page-link" href="/ban-hang/hien-thi?pageNo=${currentPage + 1}">Next</a>
                         </c:if>
                     </li>
                 </ul>
@@ -131,13 +131,13 @@
         <div class="row">
             <div>
                 <form>
-                    <form action="/ban-hang/view" method="get">
+                    <form action="/ban-hang/hien-thi" method="get">
                         <div>
                             <label class="mb-3 col-3">Số điện thoại</label>
                             <input type="text" class="col-7" name="sdt">
                         </div>
                         <button class="btn btn-primary" type="submit">Search</button>
-                        <a href="/khach-hang/view">
+                        <a href="/khach-hang/hien-thi">
                             <button type="button" class="btn btn-primary">Thông tin khách hàng</button>
                         </a>
                     </form>

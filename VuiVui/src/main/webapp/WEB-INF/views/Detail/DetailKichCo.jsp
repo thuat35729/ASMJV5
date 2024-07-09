@@ -11,7 +11,7 @@
 </head>
 <body>
 <h1 class="text-center">Thông tin chi tiết kích cỡ</h1>
-<form method="post" action="/kich-co/update?id=${listKC.id}">
+<form method="post" action="/kich-co/sua?id=${listKC.id}">
     <p>
         Mã kích cỡ
     </p>

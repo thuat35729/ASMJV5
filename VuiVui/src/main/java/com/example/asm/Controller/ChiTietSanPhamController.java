@@ -1,10 +1,7 @@
 package com.example.asm.Controller;
 
 import com.example.asm.Model.CTSP;
-import com.example.asm.Repository.CTSPRespository;
-import com.example.asm.Repository.MauSacRepository;
-import com.example.asm.Repository.SanPhamRepository;
-import com.example.asm.Repository.KichCoRepository;
+import com.example.asm.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,18 +15,20 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Controller
-public class CTSPController {
+public class ChiTietSanPhamController {
     @Autowired
-    CTSPRespository ctspr;
+    CTSPRepository ctspr;
     @Autowired
     SanPhamRepository spr;
     @Autowired
     KichCoRepository sizer;
     @Autowired
     MauSacRepository mr;
+    @Autowired
+    CoAoRepository cr;
 
-    @RequestMapping("/ctsp/view")
-    public String page(@RequestParam(value = "pageNo", defaultValue = "0") Integer pageNo, Model model, @RequestParam(value = "id_size", defaultValue = "0") Integer id) {
+    @RequestMapping("/ctsp/hien-thi")
+    public String trangChiTietSanPham(@RequestParam(value = "pageNo", defaultValue = "0") Integer pageNo, Model model, @RequestParam(value = "id_size", defaultValue = "0") Integer id) {
         Pageable pageable = PageRequest.of(pageNo, 2);
         Page<CTSP> page = ctspr.findAll(pageable);
         model.addAttribute("page", page);
@@ -38,12 +37,13 @@ public class CTSPController {
         model.addAttribute("listsp", spr.findAll());
         model.addAttribute("listsize", sizer.findAll());
         model.addAttribute("listmau", mr.findAll());
+        model.addAttribute("listCoAo", cr.findAll());
         model.addAttribute("test", sizer.findAllById(id));
         return "ChiTietSanPham";
     }
 
-    @PostMapping("/ctsp/add")
-    public String add(@ModelAttribute CTSP ctsp, RedirectAttributes redirectAttributes, Model model,
+    @PostMapping("/ctsp/them")
+    public String themCTSP(@ModelAttribute CTSP ctsp, RedirectAttributes redirectAttributes, Model model,
                       @RequestParam(value = "pageNo", defaultValue = "0") Integer pageNo) {
         Pageable pageable = PageRequest.of(pageNo, 2);
         Page<CTSP> page = ctspr.findAll(pageable);
@@ -53,6 +53,7 @@ public class CTSPController {
         model.addAttribute("listsp", spr.findAll());
         model.addAttribute("listsize", sizer.findAll());
         model.addAttribute("listmau", mr.findAll());
+        model.addAttribute("listCoAo", cr.findAll());
         boolean check = true;
         if (Objects.isNull(ctsp.getGiaBan()) || ctsp.getGiaBan() <= 0) {
             model.addAttribute("errorGiaBan", "Gia ban phai > 0");
@@ -69,14 +70,14 @@ public class CTSPController {
         ctsp.setNgayTao(LocalDateTime.now());
         ctspr.save(ctsp);
         redirectAttributes.addFlashAttribute("message", "Thêm thành công");
-        return "redirect:/ctsp/view";
+        return "redirect:/ctsp/hien-thi";
     }
 
 
-    @GetMapping("/ctsp/delete")
-    public String delete(@RequestParam("id") Integer id) {
+    @GetMapping("/ctsp/xoa")
+    public String xoaCTSP(@RequestParam("id") Integer id) {
         ctspr.deleteById(id);
-        return "redirect:/ctsp/view";
+        return "redirect:/ctsp/hien-thi";
     }
 
 

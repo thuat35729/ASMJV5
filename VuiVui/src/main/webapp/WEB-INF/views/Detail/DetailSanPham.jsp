@@ -18,7 +18,7 @@
 <body>
 <div class="row">
     <h1 class="text-center">Thông tin chi tiết sản phẩm</h1>
-    <form action="/san-pham/update?id=${listsp.id}" method="post">
+    <form action="/san-pham/sua?id=${listsp.id}" method="post">
         <p>Mã sản phẩm</p>
         <input type="text" name="maSP" value="${listsp.maSP}" class="form-control"><br>
         <p>Tên sản phẩm</p>

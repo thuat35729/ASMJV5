@@ -37,8 +37,8 @@ public class SanPhamController {
 //    }
    // String viewTable = null;
 
-    @RequestMapping("/san-pham/view")
-    public String page(@RequestParam(value = "pageNo", defaultValue = "0") Integer pageNo,
+    @RequestMapping("/san-pham/hien-thi")
+    public String danhSachSanPham(@RequestParam(value = "pageNo", defaultValue = "0") Integer pageNo,
                        //@RequestParam(value = "view", required = false) String view,
                        Model model) {
 //         if ("submit".equals(view)) {
@@ -55,16 +55,16 @@ public class SanPhamController {
     }
 
 
-    @PostMapping("/san-pham/add")
-    public String add(@ModelAttribute("sp") SanPham sanPham) {
+    @PostMapping("/san-pham/them")
+    public String themSanPham(@ModelAttribute("sp") SanPham sanPham) {
         sanPham.setNgayTao(LocalDateTime.now());
         sanPham.setNgaySua(LocalDateTime.now());
         spr.save(sanPham);
-        return "redirect:/san-pham/view";
+        return "redirect:/san-pham/hien-thi";
     }
 
-    @PostMapping("/san-pham/update")
-    public String update(@ModelAttribute SanPham sanPham, @RequestParam("id") Integer id) {
+    @PostMapping("/san-pham/sua")
+    public String suaSanPham(@ModelAttribute SanPham sanPham, @RequestParam("id") Integer id) {
 //        SanPham sp = spr.findAllById(id);
 //        sp.setMaSP(sanPham.getMaSP());
 //        sp.setTenSP(sanPham.getTenSP());
@@ -74,19 +74,19 @@ public class SanPhamController {
         sanPham.setNgaySua(LocalDateTime.now());
         sanPham.setNgayTao(sp.getNgayTao());
         spr.save(sanPham);
-        return "redirect:/san-pham/view";
+        return "redirect:/san-pham/hien-thi";
     }
 
     @GetMapping("/san-pham/delete")
-    public String delete(@ModelAttribute("sp") SanPham sanPham, @RequestParam("id") Integer id) {
+    public String XoaSanPham(@ModelAttribute("sp") SanPham sanPham, @RequestParam("id") Integer id) {
         spr.deleteById(id);
 //        SanPham sp = spr.findAllById(id);
 //        spr.delete(sp);
-        return "redirect:/san-pham/view";
+        return "redirect:/san-pham/hien-thi";
     }
 
-    @GetMapping("/san-pham/detail")
-    public String detail(@RequestParam("id") Integer id, Model model) {
+    @GetMapping("/san-pham/chi-tiet")
+    public String chiTietSanPham(@RequestParam("id") Integer id, Model model) {
         model.addAttribute("listdm", dmr.findAll());
         SanPham sp = spr.findAllById(id);
         model.addAttribute("listsp", sp);

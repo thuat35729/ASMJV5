@@ -17,7 +17,7 @@
 </head>
 <body>
 <h1 class="text-center">Thông tin chi tiết danh mục</h1>
-<form method="post" action="/danh-muc/update?id=${listDM.id}">
+<form method="post" action="/danh-muc/sua?id=${listDM.id}">
     <p>Mã danh mục</p>
     <input type="text" name="maDanhMuc" value="${listDM.maDanhMuc}">
     <p>Tên danh mục</p>

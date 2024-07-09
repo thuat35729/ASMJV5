@@ -18,14 +18,14 @@ public class HoaDonController {
     HoaDonChiTietRepository hoaDonChiTietR;
     float tongTien;
 
-    @RequestMapping("/hoa-don/view")
-    public String view(Model model) {
+    @RequestMapping("/hoa-don/hien-thi")
+    public String danhSachHoaDon(Model model) {
         model.addAttribute("listHD", hoaDonR.findAllByOrderByNgayTaoDesc());
         return "HoaDon";
     }
 
     @GetMapping("/hoa-don/chi-tiet")
-    public String chiTiet(Model model, @RequestParam("id") Integer id) {
+    public String chiTietHoaDon(Model model, @RequestParam("id") Integer id) {
         model.addAttribute("listHDCT", hoaDonChiTietR.findByIdHoaDon_Id(id));
         tongTien = 0;
         for (HoaDonCT hoaDonCT : hoaDonChiTietR.findByIdHoaDon_Id(id)) {
