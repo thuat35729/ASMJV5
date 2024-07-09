@@ -11,9 +11,8 @@ public class TrangChuController {
     @Autowired
     HoaDonRepository hdr;
 
-    @RequestMapping("/home/view")
+    @RequestMapping("/trang-chu/hien-thi")
     public String view(Model model) {
-        model.addAttribute("list", hdr.findAll());
         return "TrangChu";
     }
 }

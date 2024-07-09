@@ -21,7 +21,16 @@ public class KichCoController {
     }
 
     @PostMapping("/kich-co/them")
-    public String themKichCo(@ModelAttribute KichCo kc) {
+    public String themKichCo(@ModelAttribute KichCo kc, Model model) {
+        model.addAttribute("listsz", kichCoRepository.findAll());
+        if(kc.getMaSize().isEmpty()){
+            model.addAttribute("errorMaKichCo", "Mã kích cỡ không được để trống");
+            return "KichCo";
+        }
+        if(kc.getTenSize().isEmpty()){
+            model.addAttribute("errorTenKichCo", "Tên kích cỡ không được để trống");
+            return "KichCo";
+        }
         kc.setNgaySua(LocalDateTime.now());
         kc.setNgayTao(LocalDateTime.now());
         kichCoRepository.save(kc);

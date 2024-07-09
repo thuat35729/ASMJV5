@@ -64,7 +64,7 @@
             Hết hàng
         </label>
     </div>
-    <button type="submit" class="btn btn-info" onclick="return confirm('Co Muon Them Khong')">Thêm</button>
+    <button type="submit" class="btn btn-info" onclick="return confirm('Có muốn thêm sản phẩm không')">Thêm</button>
 </form>
 <table border="2" class="table">
     <thead>

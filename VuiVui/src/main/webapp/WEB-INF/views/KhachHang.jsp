@@ -31,15 +31,15 @@
         <p class="col-4">Trang thai
         </p>
         <div class="form-check col-4">
-            <input class="form-check-input" type="radio" value="Active" name="trangThai">
+            <input class="form-check-input" type="radio" value="Hoạt động" name="trangThai">
             <label class="form-check-label">
-                Active
+                Hoạt động
             </label>
         </div>
         <div class="form-check col-4">
-            <input class="form-check-input" type="radio" value="Inactive" name="trangThai">
+            <input class="form-check-input" type="radio" value="Ngưng hoạt động" name="trangThai">
             <label class="form-check-label">
-                Inactive
+                Ngưng hoạt động
             </label>
         </div>
     </div>

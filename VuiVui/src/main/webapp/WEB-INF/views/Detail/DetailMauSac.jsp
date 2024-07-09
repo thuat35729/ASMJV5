@@ -13,9 +13,9 @@
 <body>
 <form action="/mau-sac/sua?id=${listMau.id}" method="post">
     <p>Mã màu</p>
-    <input type="text" value="${listMau.maMau}" name="maMau">
+    <input type="text" value="${listMau.maMau}" name="maMau" class="form-control" readonly>
     <p>Tên màu</p>
-    <input type="text" value="${listMau.tenMau}" name="tenMau">
+    <input type="text" value="${listMau.tenMau}" name="tenMau" class="form-control">
     <p>trang Thái</p>
     <div class="form-check col-4">
         <input class="form-check-input" type="radio" value="Hoạt động" name="trangThai"

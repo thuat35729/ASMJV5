@@ -15,11 +15,11 @@
     <p>
         Mã kích cỡ
     </p>
-    <input type="text" name="maSize" value="${listKC.maSize}">
+    <input type="text" name="maSize" value="${listKC.maSize}" readonly class="form-control">
     <p>
         Tên kích cỡ
     </p>
-    <input type="text" name="maSize" value="${listKC.maSize}">
+    <input type="text" name="maSize" value="${listKC.maSize}" class="form-control">
     <p>
         Trang thái
     </p>

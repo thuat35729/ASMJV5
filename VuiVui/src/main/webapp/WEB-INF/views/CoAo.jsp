@@ -19,11 +19,11 @@
     <p>
         Mã cổ áo
     </p>
-    <input type="text" class="form-control" name="maCoAo">
+    <input type="text" class="form-control" name="maCoAo"><p style="color: red">${errorMaCoAo}</p>
     <p>
         Tên cổ áo
     </p>
-    <input type="text" class="form-control" name="tenCoAo">
+    <input type="text" class="form-control" name="tenCoAo"><p style="color: red">${errorTenCoAo}</p>
     <p>
         Trạng thái
     </p>

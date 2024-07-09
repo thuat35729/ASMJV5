@@ -44,14 +44,9 @@ public class BanHangController {
 
     @RequestMapping("/ban-hang/hien-thi")
     public String HienThi(Model model, @RequestParam(value = "id", defaultValue = "0") Integer id,
-                       @RequestParam(value = "sdt", defaultValue = "a") String sdt,
-                       @RequestParam(value = "pageNo", defaultValue = "0") Integer pageNo) {
-        Pageable pageable = PageRequest.of(pageNo, 5);
-        Page<HoaDon> page = hdr.findAllByOrderByNgayTaoDesc(pageable);
-        model.addAttribute("listhd", page.getContent());
-        model.addAttribute("currentPage", pageNo);
-        model.addAttribute("totalPage", page.getTotalPages());
-        model.addAttribute("listctsp", ctspr.findAllByTrangThaiLike("Còn hàng"));
+                          @RequestParam(value = "sdt", defaultValue = "a") String sdt,
+                          @RequestParam(value = "pageNo", defaultValue = "0") Integer pageNo) {
+        setModel(model, pageNo);
         model.addAttribute("listkh", khr.findTop1BySdtLike(sdt));
         idHD = id;
         //model.addAttribute("listtthd", hdr.findById(id));
@@ -132,14 +127,10 @@ public class BanHangController {
     @GetMapping("/ban-hang/them-sp")
     public String themSP(@RequestParam("idSPCT") Integer idSPCT, @RequestParam("soLuong") Integer soLuong, Model model,
                          @RequestParam(value = "pageNo", defaultValue = "0") Integer pageNo) {
+        setModel(model, pageNo);
         HoaDonCT hoaDonChiTietTonTai = hdctr.findTop1ByIdCtsp_Id(idSPCT);
         CTSP ctsp = ctspr.findAllById(idSPCT);
-        Pageable pageable = PageRequest.of(pageNo, 5);
-        Page<HoaDon> page = hdr.findAllByOrderByNgayTaoDesc(pageable);
-        model.addAttribute("listhd", page.getContent());
-        model.addAttribute("currentPage", pageNo);
-        model.addAttribute("totalPage", page.getTotalPages());
-        model.addAttribute("listctsp", ctspr.findAllByTrangThaiLike("Còn hàng"));
+        setModel(model, pageNo);
         if (soLuong > ctsp.getSoLuongTon()) {
             model.addAttribute("errorSoLuong", "Không được nhập số lượng lớn hơn số lượng tồn");
             return "BanHang";
@@ -156,19 +147,20 @@ public class BanHangController {
         boolean productExistsInCurrentOrder = false;
         for (HoaDonCT hdct : hdctr.findAll()) {
             if (hdct.getIdHoaDon().getId().equals(idHD) && hdct.getIdCtsp().getId().equals(idSPCT)) {
-                productExistsInCurrentOrder = true;
-                hoaDonChiTietTonTai = hdct;
-                break;
+                    productExistsInCurrentOrder = true;
+                    hoaDonChiTietTonTai = hdct;
+                    break;
             }
         }
         if (productExistsInCurrentOrder) {
-            int soLuongMoi = hoaDonChiTietTonTai.getSoLuong() + soLuong;
-            hoaDonChiTietTonTai.setSoLuong(soLuongMoi);
-            hoaDonChiTietTonTai.setTongTien(hoaDonChiTietTonTai.getGiaBan() * soLuongMoi);
-            ctsp.setSoLuongTon(ctsp.getSoLuongTon() - soLuong);
-            hoaDonChiTietTonTai.setNgaySua(LocalDateTime.now());
-            hdctr.save(hoaDonChiTietTonTai);
-
+            if(hoaDonChiTietTonTai.getIdHoaDon().getTrangThai().equals("Chua Thanh Toan")){
+                int soLuongMoi = hoaDonChiTietTonTai.getSoLuong() + soLuong;
+                hoaDonChiTietTonTai.setSoLuong(soLuongMoi);
+                hoaDonChiTietTonTai.setTongTien(hoaDonChiTietTonTai.getGiaBan() * soLuongMoi);
+                ctsp.setSoLuongTon(ctsp.getSoLuongTon() - soLuong);
+                hoaDonChiTietTonTai.setNgaySua(LocalDateTime.now());
+                hdctr.save(hoaDonChiTietTonTai);
+            }
         } else {
             int soLuongMoi = soLuong;
             ctsp.setSoLuongTon(ctsp.getSoLuongTon() - soLuong);
@@ -176,7 +168,7 @@ public class BanHangController {
             hoaDonCT.setGiaBan(ctsp.getGiaBan());
             hoaDonCT.setIdCtsp(ctsp);
             hoaDonCT.setSoLuong(soLuongMoi);
-            hoaDonCT.setTrangThai("Còn hàng");
+            hoaDonCT.setTrangThai("Hoạt động");
             hoaDonCT.setNgayTao(LocalDateTime.now());
             hoaDonCT.setNgaySua(LocalDateTime.now());
             hoaDonCT.setTongTien(hoaDonCT.getGiaBan() * hoaDonCT.getSoLuong());
@@ -193,10 +185,7 @@ public class BanHangController {
         if (trangThai.equals("Da Thanh Toan")) {
             Pageable pageable = PageRequest.of(pageNo, 5);
             Page<HoaDon> page = hdr.findAllByOrderByNgayTaoDesc(pageable);
-            model.addAttribute("listhd", page.getContent());
-            model.addAttribute("currentPage", pageNo);
-            model.addAttribute("totalPage", page.getTotalPages());
-            model.addAttribute("listctsp", ctspr.findAllByTrangThaiLike("Còn hàng"));
+            setModel(model, pageNo);
             model.addAttribute("errorXoaSP", "Hoa don da duoc thanh toan khong the xoa san pham khoi hoa don");
             return "BanHang";
         }
@@ -206,5 +195,14 @@ public class BanHangController {
         ctspr.save(ctsp);
         hdctr.deleteById(id);
         return "redirect:/ban-hang/hien-thi?id=" + idHD;
+    }
+
+    private void setModel(Model model, Integer pageNo) {
+        Pageable pageable = PageRequest.of(pageNo, 5);
+        Page<HoaDon> page = hdr.findAllByOrderByNgayTaoDesc(pageable);
+        model.addAttribute("listhd", page.getContent());
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPage", page.getTotalPages());
+        model.addAttribute("listctsp", ctspr.findAllByTrangThaiLike("Còn hàng"));
     }
 }

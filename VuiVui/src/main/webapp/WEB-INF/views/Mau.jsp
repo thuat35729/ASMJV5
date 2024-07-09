@@ -19,10 +19,12 @@
     <div class="mb-3">
         <label class="form-label">Ma </label>
         <input type="text" class="form-control" name="maMau">
+        <p style="color: red">${errorMaMau}</p>
     </div>
     <div class="mb-3">
         <label class="form-label">Ten </label>
         <input type="text" class="form-control" name="tenMau">
+        <p style="color: red">${errorTenMau}</p>
     </div>
     <div class="row">
         <p class="col-4">Trang thai

@@ -20,7 +20,7 @@
     <h1 class="text-center">Thông tin chi tiết sản phẩm</h1>
     <form action="/san-pham/sua?id=${listsp.id}" method="post">
         <p>Mã sản phẩm</p>
-        <input type="text" name="maSP" value="${listsp.maSP}" class="form-control"><br>
+        <input type="text" name="maSP" value="${listsp.maSP}" class="form-control" readonly><br>
         <p>Tên sản phẩm</p>
         <input type="text" name="tenSP" value="${listsp.tenSP}" class="form-control"><br>
         <p>Trạng thái</p>

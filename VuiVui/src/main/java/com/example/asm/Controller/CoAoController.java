@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Controller
 public class CoAoController {
@@ -21,7 +22,16 @@ public class CoAoController {
     }
 
     @PostMapping("/co-ao/them")
-    public String themCoAo(@ModelAttribute CoAo coAo) {
+    public String themCoAo(@ModelAttribute CoAo coAo, Model model) {
+        model.addAttribute("listCoAo", coAoRepository.findAll());
+        if(Objects.isNull(coAo.getMaCoAo())){
+            model.addAttribute("errorMaCoAo", "Không được để trống");
+            return "CoAo";
+        }
+        if(Objects.isNull(coAo.getMaCoAo())){
+            model.addAttribute("errorTenCoAo", "Không được để trống");
+            return "CoAo";
+        }
         coAo.setNgayTao(LocalDateTime.now());
         coAo.setNgaySua(LocalDateTime.now());
         coAoRepository.save(coAo);
@@ -35,7 +45,17 @@ public class CoAoController {
     }
 
     @PostMapping("/co-ao/sua")
-    public String suaCoAo(@ModelAttribute CoAo coAo, @RequestParam("id") Integer id) {
+    public String suaCoAo(@ModelAttribute CoAo coAo, @RequestParam(value = "id",required = false) Integer id, Model model) {
+        if(Objects.isNull(coAo.getMaCoAo())){
+            model.addAttribute("listCoAo", coAo);
+            model.addAttribute("errorMaCoAo", "Không được để trống mã");
+            return "CoAo";
+        }
+        if(Objects.isNull(coAo.getMaCoAo())){
+            model.addAttribute("listCoAo", coAo);
+            model.addAttribute("errorTenCoAo", "Không được để trống tên");
+            return "CoAo";
+        }
         CoAo ca = coAoRepository.findAllById(id);
         coAo.setNgaySua(LocalDateTime.now());
         coAo.setNgayTao(ca.getNgayTao());

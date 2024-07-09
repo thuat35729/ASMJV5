@@ -19,7 +19,7 @@
 <h1 class="text-center">Thông tin chi tiết danh mục</h1>
 <form method="post" action="/danh-muc/sua?id=${listDM.id}">
     <p>Mã danh mục</p>
-    <input type="text" name="maDanhMuc" value="${listDM.maDanhMuc}">
+    <input type="text" name="maDanhMuc" value="${listDM.maDanhMuc}" readonly>
     <p>Tên danh mục</p>
     <input type="text" name="tenDanhMuc" value="${listDM.tenDanhMuc}">
     <p>Trang thái</p>

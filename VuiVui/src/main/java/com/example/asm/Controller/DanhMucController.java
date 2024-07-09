@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Controller
 public class DanhMucController {
@@ -21,7 +22,16 @@ public class DanhMucController {
     }
 
     @PostMapping("/danh-muc/them")
-    public String themDanhMuc(@ModelAttribute DanhMuc danhMuc) {
+    public String themDanhMuc(@ModelAttribute DanhMuc danhMuc, Model model) {
+        model.addAttribute("listdm", danhMucRepository.findAll());
+        if (Objects.isNull(danhMuc.getMaDanhMuc())) {
+            model.addAttribute("errorMaDanhMuc", "Mã danh mục không được để trống");
+            return "DanhMuc";
+        }
+        if (Objects.isNull(danhMuc.getMaDanhMuc())) {
+            model.addAttribute("errorMaDanhMuc", "Mã danh mục không được để trống");
+            return "DanhMuc";
+        }
         danhMuc.setNgaySua(LocalDateTime.now());
         danhMuc.setNgayTao(LocalDateTime.now());
         danhMucRepository.save(danhMuc);

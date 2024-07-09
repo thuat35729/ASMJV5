@@ -28,11 +28,28 @@ public class KhachHangController {
     }
 
     @PostMapping("/khach-hang/them")
-    public void themKhachHang(@ModelAttribute KhachHang khachHang,HttpServletResponse response) throws IOException {
+    public String themKhachHang(@ModelAttribute KhachHang khachHang, HttpServletResponse response, Model model) throws IOException {
+        if (khachHang.getHoTen().isEmpty()) {
+            model.addAttribute("errorTenKhachHang", "Tên khách hàng không được để trống");
+            return "KhachHang";
+        }
+        if (khachHang.getDiaChi().isEmpty()) {
+            model.addAttribute("errorDiaChi", "Đia chỉ khách hàng không được để trống");
+            return "KhachHang";
+        }
+        if(khachHang.getSdt().isEmpty()){
+            model.addAttribute("errorSDT", "Số điện thoaị không được để trống");
+            return "KhachHang";
+        }
+        if(khachHang.getSdt().length() != 10 ){
+            model.addAttribute("errorSDT", "Số điện thoaị phải là 10 số");
+            return "KhachHang";
+        }
         khachHang.setNgayTao(LocalDate.now());
         khachHang.setNgaySua(LocalDate.now());
         khachHangRepository.save(khachHang);
-        response.sendRedirect("/khach-hang/hien-thi");
+        //response.sendRedirect("/khach-hang/hien-thi");
+        return "redirect:/khach-hang/hien-thi";
     }
 
     @GetMapping("/khach-hang/xoa")

@@ -39,7 +39,7 @@
         <h2>Danh sách hoá đơn</h2>
         <a href="/hoa-don/hien-thi">
             <button class="btn btn-primary">
-                Danh sách hóa đơn
+                Quản lý hóa đơn
             </button>
         </a>
         <table class="table">

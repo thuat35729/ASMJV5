@@ -21,7 +21,16 @@ public class MauSacController {
     }
 
     @PostMapping("/mau-sac/them")
-    public String themMauSac(@ModelAttribute MauSac mauSac) {
+    public String themMauSac(@ModelAttribute MauSac mauSac, Model model) {
+        model.addAttribute("listms", mauSacRepository.findAll());
+        if (mauSac.getMaMau().isEmpty()) {
+            model.addAttribute("errorMaMau", "Mã màu không được để trống");
+            return "Mau";
+        }
+        if (mauSac.getTenMau().isEmpty()) {
+            model.addAttribute("errorTenMau", "Tên màu không được để trống");
+            return "Mau";
+        }
         mauSac.setNgaySua(LocalDateTime.now());
         mauSac.setNgayTao(LocalDateTime.now());
         mauSacRepository.save(mauSac);
