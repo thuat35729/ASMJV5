@@ -8,6 +8,6 @@
     <title>Document</title>
 </head>
 <body>
-<a href="BanHang.jsp"><button>Click</button></a>
+<a href="/ban-hang/hien-thi"><button>Click</button></a>
 </body>
 </html>

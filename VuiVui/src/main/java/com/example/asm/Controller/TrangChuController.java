@@ -7,13 +7,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class HomeController {
+public class TrangChuController {
     @Autowired
     HoaDonRepository hdr;
 
     @RequestMapping("/home/view")
     public String view(Model model) {
         model.addAttribute("list", hdr.findAll());
-        return "index";
+        return "TrangChu";
     }
 }
