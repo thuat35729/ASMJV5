@@ -24,12 +24,16 @@ public class DanhMucController {
     @PostMapping("/danh-muc/them")
     public String themDanhMuc(@ModelAttribute DanhMuc danhMuc, Model model) {
         model.addAttribute("listdm", danhMucRepository.findAll());
+        boolean check = true;
         if (Objects.isNull(danhMuc.getMaDanhMuc())) {
             model.addAttribute("errorMaDanhMuc", "Mã danh mục không được để trống");
-            return "DanhMuc";
+            check = false;
         }
         if (Objects.isNull(danhMuc.getMaDanhMuc())) {
             model.addAttribute("errorMaDanhMuc", "Mã danh mục không được để trống");
+            check = false;
+        }
+        if (!check) {
             return "DanhMuc";
         }
         danhMuc.setNgaySua(LocalDateTime.now());

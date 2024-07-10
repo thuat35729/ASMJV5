@@ -35,19 +35,14 @@ public class SanPhamController {
 //        model.addAttribute("page", page);
 //        return "viewSP";
 //    }
-   // String viewTable = null;
+    // String viewTable = null;
 
     @RequestMapping("/san-pham/hien-thi")
     public String danhSachSanPham(@RequestParam(value = "pageNo", defaultValue = "0") Integer pageNo,
-                       //@RequestParam(value = "view", required = false) String view,
-                       Model model) {
+                                  //@RequestParam(value = "view", required = false) String view,
+                                  Model model) {
 //         if ("submit".equals(view)) {
-        Pageable pageable = PageRequest.of(pageNo, 5);
-        Page<SanPham> page = spr.findAllByOrderByNgayTaoDesc(pageable);
-        model.addAttribute("page", page.getContent());
-        model.addAttribute("currentPage", pageNo);
-        model.addAttribute("totalPage", page.getTotalPages());
-        model.addAttribute("listdm", dmr.findAll());
+        setModel(model, pageNo);
 //        viewTable = view;
 //         }
 //        model.addAttribute("view", viewTable);
@@ -56,7 +51,20 @@ public class SanPhamController {
 
 
     @PostMapping("/san-pham/them")
-    public String themSanPham(@ModelAttribute("sp") SanPham sanPham) {
+    public String themSanPham(@ModelAttribute("sp") SanPham sanPham, Model model, @RequestParam(value = "pageNo", defaultValue = "0") Integer pageNo) {
+        setModel(model, pageNo);
+        boolean check = true;
+        if (sanPham.getMaSP().isEmpty()) {
+            model.addAttribute("errorMaSP", "Mã sản phẩm không được để trống");
+            check = false;
+        }
+        if (sanPham.getTenSP().isEmpty()) {
+            model.addAttribute("errorMaSP", "Mã sản phẩm không được để trống");
+            check = false;
+        }
+        if (!check) {
+            return "SanPham";
+        }
         sanPham.setNgayTao(LocalDateTime.now());
         sanPham.setNgaySua(LocalDateTime.now());
         spr.save(sanPham);
@@ -91,6 +99,15 @@ public class SanPhamController {
         SanPham sp = spr.findAllById(id);
         model.addAttribute("listsp", sp);
         return "Detail/DetailSanPham";
+    }
+
+    private void setModel(Model model, Integer pageNo) {
+        Pageable pageable = PageRequest.of(pageNo, 5);
+        Page<SanPham> page = spr.findAllByOrderByNgayTaoDesc(pageable);
+        model.addAttribute("page", page.getContent());
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPage", page.getTotalPages());
+        model.addAttribute("listdm", dmr.findAll());
     }
 
 }

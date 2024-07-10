@@ -29,20 +29,25 @@ public class KhachHangController {
 
     @PostMapping("/khach-hang/them")
     public String themKhachHang(@ModelAttribute KhachHang khachHang, HttpServletResponse response, Model model) throws IOException {
+        model.addAttribute("listkh", khachHangRepository.findAll());
+        boolean check = true;
         if (khachHang.getHoTen().isEmpty()) {
             model.addAttribute("errorTenKhachHang", "Tên khách hàng không được để trống");
-            return "KhachHang";
+            check = false;
         }
         if (khachHang.getDiaChi().isEmpty()) {
             model.addAttribute("errorDiaChi", "Đia chỉ khách hàng không được để trống");
-            return "KhachHang";
+            check = false;
         }
         if(khachHang.getSdt().isEmpty()){
             model.addAttribute("errorSDT", "Số điện thoaị không được để trống");
-            return "KhachHang";
+            check = false;
         }
         if(khachHang.getSdt().length() != 10 ){
             model.addAttribute("errorSDT", "Số điện thoaị phải là 10 số");
+            check = false;
+        }
+        if(!check){
             return "KhachHang";
         }
         khachHang.setNgayTao(LocalDate.now());

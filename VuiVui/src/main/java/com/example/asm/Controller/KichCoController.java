@@ -23,12 +23,16 @@ public class KichCoController {
     @PostMapping("/kich-co/them")
     public String themKichCo(@ModelAttribute KichCo kc, Model model) {
         model.addAttribute("listsz", kichCoRepository.findAll());
-        if(kc.getMaSize().isEmpty()){
+        boolean check = true;
+        if (kc.getMaSize().isEmpty()) {
             model.addAttribute("errorMaKichCo", "Mã kích cỡ không được để trống");
-            return "KichCo";
+            check = false;
         }
-        if(kc.getTenSize().isEmpty()){
+        if (kc.getTenSize().isEmpty()) {
             model.addAttribute("errorTenKichCo", "Tên kích cỡ không được để trống");
+            check = false;
+        }
+        if (!check) {
             return "KichCo";
         }
         kc.setNgaySua(LocalDateTime.now());
@@ -42,13 +46,15 @@ public class KichCoController {
         kichCoRepository.deleteById(id);
         return "redirect:/kich-co/hien-thi";
     }
+
     @GetMapping("/kich-co/chi-tiet")
-    public String chiTietKichCo(@RequestParam("id") Integer id, Model model){
+    public String chiTietKichCo(@RequestParam("id") Integer id, Model model) {
         model.addAttribute("listKC", kichCoRepository.findAllById(id));
         return "Detail/DetailKichCo";
     }
+
     @GetMapping("/kich-co/sua")
-    public String suaKichCo(@ModelAttribute KichCo kichCo, @RequestParam("id") Integer id){
+    public String suaKichCo(@ModelAttribute KichCo kichCo, @RequestParam("id") Integer id) {
         KichCo kc = kichCoRepository.findAllById(id);
         kichCo.setNgayTao(kc.getNgayTao());
         kichCo.setNgaySua(LocalDateTime.now());
