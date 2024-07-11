@@ -43,7 +43,7 @@
             </label>
         </div>
     </div>
-    <button type="submit" class="btn btn-success">Submit</button>
+    <button type="submit" class="btn btn-success">Thêm</button>
 </form>
 <table class="table">
     <h1>danh sach khach hang</h1>

@@ -1,6 +1,7 @@
 package com.example.asm.Controller;
 
-import com.example.asm.Model.HoaDonCT;
+import com.example.asm.Model.HoaDonChiTiet;
+import com.example.asm.Model.HoaDonChiTiet;
 import com.example.asm.Repository.HoaDonChiTietRepository;
 import com.example.asm.Repository.HoaDonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +29,10 @@ public class HoaDonController {
     public String chiTietHoaDon(Model model, @RequestParam("id") Integer id) {
         model.addAttribute("listHDCT", hoaDonChiTietR.findByIdHoaDon_Id(id));
         tongTien = 0;
-        for (HoaDonCT hoaDonCT : hoaDonChiTietR.findByIdHoaDon_Id(id)) {
+        for (HoaDonChiTiet hoaDonCT : hoaDonChiTietR.findByIdHoaDon_Id(id)) {
             tongTien += hoaDonCT.getTongTien();
         }
         model.addAttribute("tongTienHoaDon", tongTien);
-        return "Detail/DetailHoaDonChiTiet";
+        return "Detail/ThongTinHoaDonChiTiet";
     }
 }

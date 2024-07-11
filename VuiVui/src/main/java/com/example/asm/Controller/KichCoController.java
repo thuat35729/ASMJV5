@@ -50,7 +50,7 @@ public class KichCoController {
     @GetMapping("/kich-co/chi-tiet")
     public String chiTietKichCo(@RequestParam("id") Integer id, Model model) {
         model.addAttribute("listKC", kichCoRepository.findAllById(id));
-        return "Detail/DetailKichCo";
+        return "Detail/ChiTietKichCo";
     }
 
     @GetMapping("/kich-co/sua")

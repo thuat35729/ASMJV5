@@ -78,7 +78,7 @@ public class ChiTietSanPhamController {
         boolean check = checkValidate(ctsp, model);
         if (!check) {
             model.addAttribute("listctsp", ctsp);
-            return "Detail/DetailChiTietSanPham";
+            return "Detail/ThongTinChiTietSanPham";
         }
 
         ctsp.setNgayTao(ct.getNgayTao());

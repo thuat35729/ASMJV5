@@ -51,7 +51,7 @@ public class DanhMucController {
     @GetMapping("/danh-muc/chi-tiet")
     public String chiTietDanhMuc(Model model, @RequestParam("id") Integer id) {
         model.addAttribute("listDM", danhMucRepository.findAllById(id));
-        return "Detail/DetailDanhMuc";
+        return "Detail/ChiTietDanhMuc";
     }
 
     @PostMapping("/danh-muc/sua")

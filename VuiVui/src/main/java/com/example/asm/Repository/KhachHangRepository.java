@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface KhachHangRepository extends JpaRepository<KhachHang, Integer> {
     List<KhachHang> findTop1BySdtLike(String sdt);
+
+    KhachHang findAllById(Integer id);
 }

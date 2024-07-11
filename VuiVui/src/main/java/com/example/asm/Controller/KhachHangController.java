@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Controller
 public class KhachHangController {
@@ -28,7 +29,7 @@ public class KhachHangController {
     }
 
     @PostMapping("/khach-hang/them")
-    public String themKhachHang(@ModelAttribute KhachHang khachHang, HttpServletResponse response, Model model) throws IOException {
+    public String themThongTinKhachHang(@ModelAttribute KhachHang khachHang, HttpServletResponse response, Model model) throws IOException {
         model.addAttribute("listkh", khachHangRepository.findAll());
         boolean check = true;
         if (khachHang.getHoTen().isEmpty()) {
@@ -39,19 +40,19 @@ public class KhachHangController {
             model.addAttribute("errorDiaChi", "Đia chỉ khách hàng không được để trống");
             check = false;
         }
-        if(khachHang.getSdt().isEmpty()){
+        if (khachHang.getSdt().isEmpty()) {
             model.addAttribute("errorSDT", "Số điện thoaị không được để trống");
             check = false;
         }
-        if(khachHang.getSdt().length() != 10 ){
+        if (khachHang.getSdt().length() != 10) {
             model.addAttribute("errorSDT", "Số điện thoaị phải là 10 số");
             check = false;
         }
-        if(!check){
+        if (!check) {
             return "KhachHang";
         }
-        khachHang.setNgayTao(LocalDate.now());
-        khachHang.setNgaySua(LocalDate.now());
+        khachHang.setNgayTao(LocalDateTime.now());
+        khachHang.setNgaySua(LocalDateTime.now());
         khachHangRepository.save(khachHang);
         //response.sendRedirect("/khach-hang/hien-thi");
         return "redirect:/khach-hang/hien-thi";
@@ -60,6 +61,20 @@ public class KhachHangController {
     @GetMapping("/khach-hang/xoa")
     public String xoaKhachHang(@RequestParam("id") Integer id) {
         khachHangRepository.deleteById(id);
+        return "redirect:/khach-hang/hien-thi";
+    }
+
+    @GetMapping("/khach-hang/chi-tiet")
+    public String chiTietKhachHang(Model model, @RequestParam("id") Integer id) {
+        model.addAttribute("listKH", khachHangRepository.findAllById(id));
+        return "Detail/ChiTietKhachHang";
+    }
+    @PostMapping("/khach-hang/sua")
+    public String suaThongTinKhachHang(@ModelAttribute KhachHang khachHang, @RequestParam("id") Integer id){
+        KhachHang kh = khachHangRepository.findAllById(id);
+        khachHang.setNgayTao(kh.getNgaySua());
+        khachHang.setNgaySua(LocalDateTime.now());
+        khachHangRepository.save(khachHang);
         return "redirect:/khach-hang/hien-thi";
     }
 }

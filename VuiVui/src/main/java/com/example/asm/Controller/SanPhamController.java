@@ -98,7 +98,7 @@ public class SanPhamController {
         model.addAttribute("listdm", dmr.findAll());
         SanPham sp = spr.findAllById(id);
         model.addAttribute("listsp", sp);
-        return "Detail/DetailSanPham";
+        return "Detail/ChiTietSanPham";
     }
 
     private void setModel(Model model, Integer pageNo) {

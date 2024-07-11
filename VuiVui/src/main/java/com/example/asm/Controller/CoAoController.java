@@ -66,6 +66,6 @@ public class CoAoController {
     @GetMapping("/co-ao/chi-tiet")
     public String chiTietCoAo(@RequestParam("id") Integer id, Model model) {
         model.addAttribute("listCoAo", coAoRepository.findAllById(id));
-        return "Detail/DetailCoAo";
+        return "Detail/ChiTietCoAo";
     }
 }

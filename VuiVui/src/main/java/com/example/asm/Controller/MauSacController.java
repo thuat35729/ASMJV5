@@ -50,7 +50,7 @@ public class MauSacController {
     @GetMapping("/mau-sac/chi-tiet")
     public String chiTietMauSac(Model model, @RequestParam("id") Integer id) {
         model.addAttribute("listMau", mauSacRepository.findAllById(id));
-        return "Detail/DetailMauSac";
+        return "Detail/ChiTietMauSac";
     }
 
     @PostMapping("/mau-sac/sua")
